@@ -175,29 +175,20 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 > Example responses
 
 ```json
-[
-  {
-    "usd_balance": 0,
-    "satoshi_balance": 0
-  }
-]
+{
+  "usd_balance": 120.34,
+  "balance": 27018060,
+  "unconfirmed_balance": 27018060,
+  "human_balance": 0.2701806,
+  "human_unconfirmed_balance": 0.2701806
+}
 ```
 
 <h3 id="Get Balance-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Returns the pets that were deleted|Inline|
-
-<h3 id="Get Balance-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|*anonymous*|[[balance](#schemabalance)]|false|No description|
-|» usd_balance|integer|true|No description|
-|» satoshi_balance|integer|true|No description|
+|default|Default|Returns the balances|[balance](#schemabalance)|
 
 <aside class="success">
 This operation does not require authentication
@@ -353,8 +344,28 @@ Returns the transaction history for an address or addresses.
 ```json
 [
   {
-    "usd_balance": 0,
-    "satoshi_balance": 0
+    "total_txs": 37000,
+    "txs": [
+      {
+        "blockheight": 48138,
+        "time": 1524579200,
+        "total_out": 1,
+        "total_in": 1,
+        "fees": 40000,
+        "vins": [
+          {
+            "amount": 395260,
+            "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+          }
+        ],
+        "vouts": [
+          {
+            "amount": 395260,
+            "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+          }
+        ]
+      }
+    ]
   }
 ]
 ```
@@ -371,9 +382,20 @@ Status Code **default**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|*anonymous*|[[balance](#schemabalance)]|false|No description|
-|» usd_balance|integer|true|No description|
-|» satoshi_balance|integer|true|No description|
+|*anonymous*|[[history](#schemahistory)]|false|No description|
+|» total_txs|integer|false|No description|
+|» txs|[[tx](#schematx)]|false|No description|
+|»» blockheight|integer|false|No description|
+|»» time|integer|false|No description|
+|»» total_out|integer|false|No description|
+|»» total_in|integer|false|No description|
+|»» fees|integer|false|No description|
+|»» vins|[[vins](#schemavins)]|false|No description|
+|»»» amount|integer|false|No description|
+|»»» address|string|false|No description|
+|»» vouts|[[vouts](#schemavouts)]|false|No description|
+|»»» amount|integer|false|No description|
+|»»» address|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
@@ -529,8 +551,10 @@ Returns the unspent outputs for an address or addresses.
 ```json
 [
   {
-    "usd_balance": 0,
-    "satoshi_balance": 0
+    "amount": 395260,
+    "vout": 1,
+    "txid": "9bd89c6555d42a2e0922f32f9227440def71ffc4e03ac6eda4c79ebbc0ceed1f",
+    "script_pub_key": "76a91404d075b3f501deeef5565143282b6cfe8fad5e9488ac"
   }
 ]
 ```
@@ -547,9 +571,11 @@ Status Code **default**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|*anonymous*|[[balance](#schemabalance)]|false|No description|
-|» usd_balance|integer|true|No description|
-|» satoshi_balance|integer|true|No description|
+|*anonymous*|[[utxo](#schemautxo)]|false|No description|
+|» amount|integer|false|No description|
+|» vout|integer|false|No description|
+|» txid|string|false|No description|
+|» script_pub_key|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
@@ -703,12 +729,10 @@ Send a transaction onto the network.
 > Example responses
 
 ```json
-[
-  {
-    "usd_balance": 0,
-    "satoshi_balance": 0
-  }
-]
+{
+  "status_code": 200,
+  "message": "3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749"
+}
 ```
 
 <h3 id="Send Transaction-responses">Responses</h3>
@@ -723,9 +747,8 @@ Status Code **default**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|*anonymous*|[[balance](#schemabalance)]|false|No description|
-|» usd_balance|integer|true|No description|
-|» satoshi_balance|integer|true|No description|
+|» status_code|integer|false|No description|
+|» message|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
@@ -739,8 +762,11 @@ This operation does not require authentication
 
 ```json
 {
-  "usd_balance": 0,
-  "satoshi_balance": 0
+  "usd_balance": 120.34,
+  "balance": 27018060,
+  "unconfirmed_balance": 27018060,
+  "human_balance": 0.2701806,
+  "human_unconfirmed_balance": 0.2701806
 }
 ```
 
@@ -748,6 +774,143 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|usd_balance|integer|true|No description|
-|satoshi_balance|integer|true|No description|
+|usd_balance|integer|false|No description|
+|balance|integer|false|No description|
+|unconfirmed_balance|integer|false|No description|
+|human_balance|number|false|No description|
+|human_unconfirmed_balance|number|false|No description|
+
+<h2 id="tocSvins">vins</h2>
+
+<a id="schemavins"></a>
+
+```json
+{
+  "amount": 395260,
+  "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|amount|integer|false|No description|
+|address|string|false|No description|
+
+<h2 id="tocSvouts">vouts</h2>
+
+<a id="schemavouts"></a>
+
+```json
+{
+  "amount": 395260,
+  "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|amount|integer|false|No description|
+|address|string|false|No description|
+
+<h2 id="tocStx">tx</h2>
+
+<a id="schematx"></a>
+
+```json
+{
+  "blockheight": 48138,
+  "time": 1524579200,
+  "total_out": 1,
+  "total_in": 1,
+  "fees": 40000,
+  "vins": [
+    {
+      "amount": 395260,
+      "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+    }
+  ],
+  "vouts": [
+    {
+      "amount": 395260,
+      "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+    }
+  ]
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|blockheight|integer|false|No description|
+|time|integer|false|No description|
+|total_out|integer|false|No description|
+|total_in|integer|false|No description|
+|fees|integer|false|No description|
+|vins|[[vins](#schemavins)]|false|No description|
+|vouts|[[vouts](#schemavouts)]|false|No description|
+
+<h2 id="tocSutxo">utxo</h2>
+
+<a id="schemautxo"></a>
+
+```json
+{
+  "amount": 395260,
+  "vout": 1,
+  "txid": "9bd89c6555d42a2e0922f32f9227440def71ffc4e03ac6eda4c79ebbc0ceed1f",
+  "script_pub_key": "76a91404d075b3f501deeef5565143282b6cfe8fad5e9488ac"
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|amount|integer|false|No description|
+|vout|integer|false|No description|
+|txid|string|false|No description|
+|script_pub_key|string|false|No description|
+
+<h2 id="tocShistory">history</h2>
+
+<a id="schemahistory"></a>
+
+```json
+{
+  "total_txs": 37000,
+  "txs": [
+    {
+      "blockheight": 48138,
+      "time": 1524579200,
+      "total_out": 1,
+      "total_in": 1,
+      "fees": 40000,
+      "vins": [
+        {
+          "amount": 395260,
+          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+        }
+      ],
+      "vouts": [
+        {
+          "amount": 395260,
+          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|total_txs|integer|false|No description|
+|txs|[[tx](#schematx)]|false|No description|
 
