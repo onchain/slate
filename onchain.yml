@@ -8,6 +8,19 @@ servers:
 
 
 definitions:
+
+  enums:
+    Coin:
+      type: string
+      enum:
+        - bitcoin
+        - litecoin
+        - ethereum
+        - bitcoin_private
+        - bitcoin_gold
+        - dash
+        - zcash
+        - zclassic
   
   balance:
     type: object
@@ -112,7 +125,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -140,7 +153,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -169,7 +182,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -198,7 +211,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: rawtx   

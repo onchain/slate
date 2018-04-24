@@ -169,8 +169,21 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|string|true|The name of the coin i.e. bitcoin|
+|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|coin|bitcoin|
+|coin|litecoin|
+|coin|ethereum|
+|coin|bitcoin_private|
+|coin|bitcoin_gold|
+|coin|dash|
+|coin|zcash|
+|coin|zclassic|
 
 > Example responses
 
@@ -336,8 +349,21 @@ Returns the transaction history for an address or addresses.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|string|true|The name of the coin i.e. bitcoin|
+|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|coin|bitcoin|
+|coin|litecoin|
+|coin|ethereum|
+|coin|bitcoin_private|
+|coin|bitcoin_gold|
+|coin|dash|
+|coin|zcash|
+|coin|zclassic|
 
 > Example responses
 
@@ -543,8 +569,21 @@ Returns the unspent outputs for an address or addresses.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|string|true|The name of the coin i.e. bitcoin|
+|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|coin|bitcoin|
+|coin|litecoin|
+|coin|ethereum|
+|coin|bitcoin_private|
+|coin|bitcoin_gold|
+|coin|dash|
+|coin|zcash|
+|coin|zclassic|
 
 > Example responses
 
@@ -723,8 +762,21 @@ Send a transaction onto the network.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|string|true|The name of the coin i.e. bitcoin|
+|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
 |rawtx|path|string|true|The raw signed transaction as a hex string|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|coin|bitcoin|
+|coin|litecoin|
+|coin|ethereum|
+|coin|bitcoin_private|
+|coin|bitcoin_gold|
+|coin|dash|
+|coin|zcash|
+|coin|zclassic|
 
 > Example responses
 
@@ -755,6 +807,18 @@ This operation does not require authentication
 </aside>
 
 # Schemas
+
+<h2 id="tocSenums">enums</h2>
+
+<a id="schemaenums"></a>
+
+```json
+null
+```
+
+### Properties
+
+*None*
 
 <h2 id="tocSbalance">balance</h2>
 
