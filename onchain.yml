@@ -5,11 +5,25 @@ info:
 servers:
   - url: https://onchain.io
     description: Main production server
+
+
+definitions:
+  balance:
+    type: object
+    required:
+      - usd_balance
+      - satoshi_balance
+    properties:
+      usd_balance:
+        type: integer
+      satoshi_balance:
+        type: integer
+    
 paths:
   /api/address/{coin}/{addresses}:
     get:
       tags:
-        - Coin Data
+        - Address API
       parameters:
         - in: path
           name: coin   # Note the name is the same as in the path
@@ -17,118 +31,110 @@ paths:
           schema:
             type: string
           description: The name of the coin i.e. bitcoin
+        - in: path
+          name: addresses   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: A comma seperated list of public addresses
       operationId: Get Balance
-      summary: Returns balances for coins
+      summary: Get Balance
       description: Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
       produces:
       - application/json
       responses:
-        "200":
-          description: |-
-            The combined balances
-          examples:
-            application/json: |-
-              {
-                  "versions": [
-                      {
-                          "status": "CURRENT",
-                          "updated": "2011-01-21T11:33:21Z",
-                          "id": "v2.0",
-                          "links": [
-                              {
-                                  "href": "http://127.0.0.1:8774/v2/",
-                                  "rel": "self"
-                              }
-                          ]
-                      }
-              }
-  /v2:
+        default:
+          description: Returns the pets that were deleted
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/balance"
+  /api/address/history/{coin}/{addresses}:
     get:
-      operationId: getVersionDetailsv2
-      summary: Show API version details
+      tags:
+        - Address API
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The name of the coin i.e. bitcoin
+        - in: path
+          name: addresses   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: A comma seperated list of public addresses
+      operationId: Get History
+      summary: Get History
+      description: Returns the transaction history for an address or addresses.
       produces:
       - application/json
       responses:
-        "200":
-          description: |-
-            200 203 response
-          examples:
-            application/json: |-
-              {
-                  "version": {
-                      "status": "CURRENT",
-                      "updated": "2011-01-21T11:33:21Z",
-                      "media-types": [
-                          {
-                              "base": "application/xml",
-                              "type": "application/vnd.openstack.compute+xml;version=2"
-                          },
-                          {
-                              "base": "application/json",
-                              "type": "application/vnd.openstack.compute+json;version=2"
-                          }
-                      ],
-                      "id": "v2.0",
-                      "links": [
-                          {
-                              "href": "http://127.0.0.1:8774/v2/",
-                              "rel": "self"
-                          },
-                          {
-                              "href": "http://docs.openstack.org/api/openstack-compute/2/os-compute-devguide-2.pdf",
-                              "type": "application/pdf",
-                              "rel": "describedby"
-                          },
-                          {
-                              "href": "http://docs.openstack.org/api/openstack-compute/2/wadl/os-compute-2.wadl",
-                              "type": "application/vnd.sun.wadl+xml",
-                              "rel": "describedby"
-                          },
-                          {
-                            "href": "http://docs.openstack.org/api/openstack-compute/2/wadl/os-compute-2.wadl",
-                            "type": "application/vnd.sun.wadl+xml",
-                            "rel": "describedby"
-                          }
-                      ]
-                  }
-              }
-        "203":
-          description: |-
-            200 203 response
-          examples:
-            application/json: |-
-              {
-                  "version": {
-                      "status": "CURRENT",
-                      "updated": "2011-01-21T11:33:21Z",
-                      "media-types": [
-                          {
-                              "base": "application/xml",
-                              "type": "application/vnd.openstack.compute+xml;version=2"
-                          },
-                          {
-                              "base": "application/json",
-                              "type": "application/vnd.openstack.compute+json;version=2"
-                          }
-                      ],
-                      "id": "v2.0",
-                      "links": [
-                          {
-                              "href": "http://23.253.228.211:8774/v2/",
-                              "rel": "self"
-                          },
-                          {
-                              "href": "http://docs.openstack.org/api/openstack-compute/2/os-compute-devguide-2.pdf",
-                              "type": "application/pdf",
-                              "rel": "describedby"
-                          },
-                          {
-                              "href": "http://docs.openstack.org/api/openstack-compute/2/wadl/os-compute-2.wadl",
-                              "type": "application/vnd.sun.wadl+xml",
-                              "rel": "describedby"
-                          }
-                      ]
-                  }
-              }
+        default:
+          description: Returns the pets that were deleted
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/balance"
+  /api/address/utxo/{coin}/{addresses}:
+    get:
+      tags:
+        - Address API
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The name of the coin i.e. bitcoin
+        - in: path
+          name: addresses   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: A comma seperated list of public addresses
+      operationId: Get Unspent
+      summary: Get Unspent Outs
+      description: Returns the unspent outputs for an address or addresses.
+      produces:
+      - application/json
+      responses:
+        default:
+          description: Returns the pets that were deleted
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/balance"
+  /api/transaction/send/{coin}/{rawtx}:
+    post:
+      tags:
+        - Address API
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The name of the coin i.e. bitcoin
+        - in: path
+          name: rawtx   
+          required: true
+          schema:
+            type: string
+          description: The raw signed transaction as a hex string
+      operationId: Send TX
+      summary: Send Transaction
+      description: Send a transaction onto the network.
+      produces:
+      - application/json
+      responses:
+        default:
+          description: Returns the pets that were deleted
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/balance"
 consumes:
 - application/json
