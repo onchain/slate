@@ -37,7 +37,9 @@
       $toc.find(tocLinkSelector).each(function() {
         var targetId = $(this).attr('href');
         if (targetId[0] === "#") {
-          headerHeights[targetId] = $(targetId).offset().top;
+          if($(targetId).offset()) {
+            headerHeights[targetId] = $(targetId).offset().top;
+          }
         }
       });
     };

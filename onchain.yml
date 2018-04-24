@@ -1,18 +1,31 @@
 swagger: "2.0"
 info:
-  title: Simple API overview
+  title: ONCHAIN.IO API overview
   version: v2
+servers:
+  - url: https://onchain.io
+    description: Main production server
 paths:
-  /:
+  /api/address/{coin}/{addresses}:
     get:
-      operationId: listVersionsv2
-      summary: List API versions
+      tags:
+        - Coin Data
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The name of the coin i.e. bitcoin
+      operationId: Get Balance
+      summary: Returns balances for coins
+      description: Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
       produces:
       - application/json
       responses:
         "200":
           description: |-
-            200 300 response
+            The combined balances
           examples:
             application/json: |-
               {
@@ -27,50 +40,7 @@ paths:
                                   "rel": "self"
                               }
                           ]
-                      },
-                      {
-                          "status": "EXPERIMENTAL",
-                          "updated": "2013-07-23T11:33:21Z",
-                          "id": "v3.0",
-                          "links": [
-                              {
-                                  "href": "http://127.0.0.1:8774/v3/",
-                                  "rel": "self"
-                              }
-                          ]
                       }
-                  ]
-              }
-        "300":
-          description: |-
-            200 300 response
-          examples:
-            application/json: |-
-              {
-                  "versions": [
-                      {
-                          "status": "CURRENT",
-                          "updated": "2011-01-21T11:33:21Z",
-                          "id": "v2.0",
-                          "links": [
-                              {
-                                  "href": "http://127.0.0.1:8774/v2/",
-                                  "rel": "self"
-                              }
-                          ]
-                      },
-                      {
-                          "status": "EXPERIMENTAL",
-                          "updated": "2013-07-23T11:33:21Z",
-                          "id": "v3.0",
-                          "links": [
-                              {
-                                  "href": "http://127.0.0.1:8774/v3/",
-                                  "rel": "self"
-                              }
-                          ]
-                      }
-                  ]
               }
   /v2:
     get:

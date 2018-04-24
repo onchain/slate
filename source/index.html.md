@@ -1,5 +1,5 @@
 ---
-title: Simple API overview v2
+title: ONCHAIN.IO API overview v2
 language_tabs:
   - shell: Shell
   - http: HTTP
@@ -17,28 +17,32 @@ headingLevel: 2
 
 ---
 
-<h1 id="Simple-API-overview">Simple API overview v2</h1>
+<h1 id="ONCHAIN.IO-API-overview">ONCHAIN.IO API overview v2</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-<h1 id="Simple-API-overview-Default">Default</h1>
+Base URLs:
 
-## listVersionsv2
+* <a href="https://onchain.io">https://onchain.io</a>
 
-<a id="opIdlistVersionsv2"></a>
+<h1 id="ONCHAIN.IO-API-overview-Coin-Data">Coin Data</h1>
+
+## Get_Balance
+
+<a id="opIdGet Balance"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET /// \
+curl -X GET https://onchain.io/api/address/{coin}/{addresses} \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET /// HTTP/1.1
-Host: null
+GET https://onchain.io/api/address/{coin}/{addresses} HTTP/1.1
+Host: onchain.io
 
 Accept: application/json
 
@@ -51,7 +55,7 @@ var headers = {
 };
 
 $.ajax({
-  url: '///',
+  url: 'https://onchain.io/api/address/{coin}/{addresses}',
   method: 'get',
 
   headers: headers,
@@ -70,7 +74,7 @@ const headers = {
 
 };
 
-fetch('///',
+fetch('https://onchain.io/api/address/{coin}/{addresses}',
 {
   method: 'GET',
 
@@ -92,7 +96,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get '///',
+result = RestClient.get 'https://onchain.io/api/address/{coin}/{addresses}',
   params: {
   }, headers: headers
 
@@ -106,7 +110,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('///', params={
+r = requests.get('https://onchain.io/api/address/{coin}/{addresses}', params={
 
 }, headers = headers)
 
@@ -115,7 +119,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("///");
+URL obj = new URL("https://onchain.io/api/address/{coin}/{addresses}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -147,7 +151,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "///", data)
+    req, err := http.NewRequest("GET", "https://onchain.io/api/address/{coin}/{addresses}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -157,27 +161,29 @@ func main() {
 
 ```
 
-`GET /`
+`GET /api/address/{coin}/{addresses}`
 
-*List API versions*
+*Returns balances for coins*
+
+Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
+
+<h3 id="Get_Balance-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
 
 > Example responses
 
-<h3 id="listVersionsv2-responses">Responses</h3>
+<h3 id="Get_Balance-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|200 300 response|Inline|
-|300|[Multiple Choices](https://tools.ietf.org/html/rfc7231#section-6.4.1)|200 300 response|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The combined balances|Inline|
 
-<h3 id="listVersionsv2-responseschema">Response Schema</h3>
+<h3 id="Get_Balance-responseschema">Response Schema</h3>
 
 Status Code **200**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-
-Status Code **300**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -185,6 +191,8 @@ Status Code **300**
 <aside class="success">
 This operation does not require authentication
 </aside>
+
+<h1 id="ONCHAIN.IO-API-overview-Default">Default</h1>
 
 ## getVersionDetailsv2
 
@@ -194,14 +202,14 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X GET ///v2 \
+curl -X GET https://onchain.io/v2 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET ///v2 HTTP/1.1
-Host: null
+GET https://onchain.io/v2 HTTP/1.1
+Host: onchain.io
 
 Accept: application/json
 
@@ -214,7 +222,7 @@ var headers = {
 };
 
 $.ajax({
-  url: '///v2',
+  url: 'https://onchain.io/v2',
   method: 'get',
 
   headers: headers,
@@ -233,7 +241,7 @@ const headers = {
 
 };
 
-fetch('///v2',
+fetch('https://onchain.io/v2',
 {
   method: 'GET',
 
@@ -255,7 +263,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get '///v2',
+result = RestClient.get 'https://onchain.io/v2',
   params: {
   }, headers: headers
 
@@ -269,7 +277,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('///v2', params={
+r = requests.get('https://onchain.io/v2', params={
 
 }, headers = headers)
 
@@ -278,7 +286,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("///v2");
+URL obj = new URL("https://onchain.io/v2");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -310,7 +318,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "///v2", data)
+    req, err := http.NewRequest("GET", "https://onchain.io/v2", data)
     req.Header = headers
 
     client := &http.Client{}
