@@ -174,7 +174,7 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
+|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
 
 #### Enumerated Values
@@ -354,7 +354,7 @@ Returns the transaction history for an address or addresses.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
+|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
 
 #### Enumerated Values
@@ -574,7 +574,7 @@ Returns the unspent outputs for an address or addresses.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
+|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
 
 #### Enumerated Values
@@ -767,7 +767,7 @@ Send a transaction onto the network.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[enums/Coin](#schemaenums/coin)|true|The name of the coin i.e. bitcoin|
+|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
 |rawtx|path|string|true|The raw signed transaction as a hex string|
 
 #### Enumerated Values
@@ -813,17 +813,32 @@ This operation does not require authentication
 
 # Schemas
 
-<h2 id="tocSenums">enums</h2>
+<h2 id="tocScoin">coin</h2>
 
-<a id="schemaenums"></a>
+<a id="schemacoin"></a>
 
 ```json
-null
+"bitcoin"
 ```
 
 ### Properties
 
-*None*
+|Name|Type|Required|Description|
+|---|---|---|---|
+|*anonymous*|string|false|No description|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|*anonymous*|bitcoin|
+|*anonymous*|litecoin|
+|*anonymous*|ethereum|
+|*anonymous*|bitcoin_private|
+|*anonymous*|bitcoin_gold|
+|*anonymous*|dash|
+|*anonymous*|zcash|
+|*anonymous*|zclassic|
 
 <h2 id="tocSbalance">balance</h2>
 

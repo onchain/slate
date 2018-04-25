@@ -17,18 +17,17 @@ components:
       
   schemas:
 
-    enums:
-      Coin:
-        type: string
-        enum:
-          - bitcoin
-          - litecoin
-          - ethereum
-          - bitcoin_private
-          - bitcoin_gold
-          - dash
-          - zcash
-          - zclassic
+    coin:
+      type: string
+      enum:
+        - bitcoin
+        - litecoin
+        - ethereum
+        - bitcoin_private
+        - bitcoin_gold
+        - dash
+        - zcash
+        - zclassic
     
     balance:
       type: object
@@ -133,7 +132,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/components/schemas/enums/Coin'
+            $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -161,7 +160,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/components/schemas/enums/Coin'
+            $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -191,7 +190,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/components/schemas/enums/Coin'
+            $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -221,7 +220,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/components/schemas/enums/Coin'
+            $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: rawtx   
