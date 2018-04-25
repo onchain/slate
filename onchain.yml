@@ -233,7 +233,7 @@ paths:
       description: Send a transaction onto the network.
       responses:
         default:
-          description: Returns the pets that were deleted
+          description: Send a transaction onto the network.
           content:
             application/json:
               schema:
