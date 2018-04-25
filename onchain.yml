@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   title: ONCHAIN.IO API overview
   version: v2
@@ -7,113 +7,121 @@ servers:
     description: Main production server
 
 
-definitions:
+components:
 
-  enums:
-    Coin:
-      type: string
-      enum:
-        - bitcoin
-        - litecoin
-        - ethereum
-        - bitcoin_private
-        - bitcoin_gold
-        - dash
-        - zcash
-        - zclassic
-  
-  balance:
-    type: object
-    properties:
-      usd_balance:
-        type: integer
-        example: 120.34
-      balance:
-        type: integer
-        example: 27018060
-      unconfirmed_balance:
-        type: integer
-        example: 27018060
-      human_balance:
-        type: number
-        example: 0.2701806
-      human_unconfirmed_balance:
-        type: number
-        example: 0.2701806
-        
-  vins:
-    type: object
-    properties:
-      amount:
-        type: integer
-        example: 395260
-      address:
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: X-API-KEY  # name of the header, query parameter or cookie
+      
+  schemas:
+
+    enums:
+      Coin:
         type: string
-        example: 1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX
-        
-  vouts:
-    type: object
-    properties:
-      amount:
-        type: integer
-        example: 395260
-      address:
-        type: string
-        example: 1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX
-        
-  tx:
-    type: object
-    properties:
-      blockheight:
-        type: integer
-        example: 48138
-      time:
-        type: integer
-        example: 1524579200
-      total_out:
-        type: integer
-        example: 1
-      total_in:
-        type: integer
-        example: 1
-      fees:
-        type: integer
-        example: 40000
-      vins:
-        type: array
-        items:
-          $ref: '#/definitions/vins'
-      vouts:
-        type: array
-        items:
-          $ref: '#/definitions/vouts'
-  
-  utxo:
-    type: object
-    properties:
-      amount:
-        type: integer
-        example: 395260
-      vout:
-        type: integer
-        example: 1
-      txid:
-        type: string
-        example: 9bd89c6555d42a2e0922f32f9227440def71ffc4e03ac6eda4c79ebbc0ceed1f
-      script_pub_key:
-        type: string
-        example: 76a91404d075b3f501deeef5565143282b6cfe8fad5e9488ac
-        
-  history:
-    type: object
-    properties:
-      total_txs:
-        type: integer
-        example: 37000
-      txs:
-        type: array
-        items:
-          $ref: '#/definitions/tx'
+        enum:
+          - bitcoin
+          - litecoin
+          - ethereum
+          - bitcoin_private
+          - bitcoin_gold
+          - dash
+          - zcash
+          - zclassic
+    
+    balance:
+      type: object
+      properties:
+        usd_balance:
+          type: integer
+          example: 120.34
+        balance:
+          type: integer
+          example: 27018060
+        unconfirmed_balance:
+          type: integer
+          example: 27018060
+        human_balance:
+          type: number
+          example: 0.2701806
+        human_unconfirmed_balance:
+          type: number
+          example: 0.2701806
+          
+    vins:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 395260
+        address:
+          type: string
+          example: 1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX
+          
+    vouts:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 395260
+        address:
+          type: string
+          example: 1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX
+          
+    tx:
+      type: object
+      properties:
+        blockheight:
+          type: integer
+          example: 48138
+        time:
+          type: integer
+          example: 1524579200
+        total_out:
+          type: integer
+          example: 1
+        total_in:
+          type: integer
+          example: 1
+        fees:
+          type: integer
+          example: 40000
+        vins:
+          type: array
+          items:
+            $ref: '#/components/schemas/vins'
+        vouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/vouts'
+    
+    utxo:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 395260
+        vout:
+          type: integer
+          example: 1
+        txid:
+          type: string
+          example: 9bd89c6555d42a2e0922f32f9227440def71ffc4e03ac6eda4c79ebbc0ceed1f
+        script_pub_key:
+          type: string
+          example: 76a91404d075b3f501deeef5565143282b6cfe8fad5e9488ac
+          
+    history:
+      type: object
+      properties:
+        total_txs:
+          type: integer
+          example: 37000
+        txs:
+          type: array
+          items:
+            $ref: '#/components/schemas/tx'
     
 paths:
   /api/address/{coin}/{addresses}:
@@ -125,7 +133,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/definitions/enums/Coin'
+            $ref: '#/components/schemas/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -136,13 +144,13 @@ paths:
       operationId: Get Balance
       summary: Get Balance
       description: Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
-      produces:
-      - application/json
       responses:
-        default:
+        '200':
           description: Returns the balances
-          schema:
-            $ref: "#/definitions/balance"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/balance"
             
   /api/address/history/{coin}/{addresses}:
     get:
@@ -153,7 +161,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/definitions/enums/Coin'
+            $ref: '#/components/schemas/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -164,15 +172,16 @@ paths:
       operationId: Get History
       summary: Get History
       description: Returns the transaction history for an address or addresses.
-      produces:
-      - application/json
       responses:
-        default:
-          description: Returns the pets that were deleted
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/history"
+        '200':
+          description: Returns the transaction history for an address or addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/history"
+                  
   /api/address/utxo/{coin}/{addresses}:
     get:
       tags:
@@ -182,7 +191,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/definitions/enums/Coin'
+            $ref: '#/components/schemas/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: addresses   # Note the name is the same as in the path
@@ -193,15 +202,16 @@ paths:
       operationId: Get Unspent
       summary: Get Unspent Outs
       description: Returns the unspent outputs for an address or addresses.
-      produces:
-      - application/json
       responses:
-        default:
-          description: Returns the pets that were deleted
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/utxo"
+        '200':
+          description: Returns the unspent outputs for an address or addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/utxo"
+                  
   /api/transaction/send/{coin}/{rawtx}:
     post:
       tags:
@@ -211,7 +221,7 @@ paths:
           name: coin   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/definitions/enums/Coin'
+            $ref: '#/components/schemas/enums/Coin'
           description: The name of the coin i.e. bitcoin
         - in: path
           name: rawtx   
@@ -222,18 +232,16 @@ paths:
       operationId: Send TX
       summary: Send Transaction
       description: Send a transaction onto the network.
-      produces:
-      - application/json
       responses:
         default:
           description: Returns the pets that were deleted
-          schema:
-            properties:
-              status_code:
-                type: integer
-                example: 200
-              message:
-                type: string
-                example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749
-consumes:
-- application/json
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749

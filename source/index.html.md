@@ -25,6 +25,11 @@ Base URLs:
 
 * <a href="https://onchain.io">https://onchain.io</a>
 
+# Authentication
+
+* API Key (ApiKeyAuth)
+    - Parameter Name: **X-API-KEY**, in: header. 
+
 <h1 id="ONCHAIN.IO-API-overview-Address-API">Address API</h1>
 
 ## Get Balance
@@ -201,7 +206,7 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Returns the balances|[balance](#schemabalance)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the balances|[balance](#schemabalance)|
 
 <aside class="success">
 This operation does not require authentication
@@ -400,11 +405,11 @@ Returns the transaction history for an address or addresses.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Returns the pets that were deleted|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the transaction history for an address or addresses|Inline|
 
 <h3 id="Get History-responseschema">Response Schema</h3>
 
-Status Code **default**
+Status Code **200**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -602,11 +607,11 @@ Returns the unspent outputs for an address or addresses.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Returns the pets that were deleted|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the unspent outputs for an address or addresses|Inline|
 
 <h3 id="Get Unspent Outs-responseschema">Response Schema</h3>
 
-Status Code **default**
+Status Code **200**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
