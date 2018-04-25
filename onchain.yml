@@ -18,7 +18,6 @@ components:
   schemas:
 
     coin:
-      type: string
       enum:
         - bitcoin
         - litecoin
@@ -131,6 +130,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
+          type: string
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
@@ -159,6 +159,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
+          type: string
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
@@ -189,6 +190,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
+          type: string
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
@@ -219,6 +221,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
+          type: string
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin

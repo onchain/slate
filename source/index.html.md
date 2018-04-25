@@ -796,7 +796,7 @@ Send a transaction onto the network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Returns the pets that were deleted|Inline|
+|default|Default|Send a transaction onto the network.|Inline|
 
 <h3 id="Send Transaction-responseschema">Response Schema</h3>
 
@@ -823,22 +823,7 @@ This operation does not require authentication
 
 ### Properties
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|*anonymous*|string|false|No description|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|*anonymous*|bitcoin|
-|*anonymous*|litecoin|
-|*anonymous*|ethereum|
-|*anonymous*|bitcoin_private|
-|*anonymous*|bitcoin_gold|
-|*anonymous*|dash|
-|*anonymous*|zcash|
-|*anonymous*|zclassic|
+*None*
 
 <h2 id="tocSbalance">balance</h2>
 
