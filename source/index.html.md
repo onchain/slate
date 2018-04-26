@@ -625,6 +625,8 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+<h1 id="ONCHAIN.IO-API-overview-Transaction-API">Transaction API</h1>
+
 ## Send Transaction
 
 <a id="opIdSend TX"></a>

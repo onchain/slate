@@ -216,7 +216,7 @@ paths:
   /api/transaction/send/{coin}/{rawtx}:
     post:
       tags:
-        - Address API
+        - Transaction API
       parameters:
         - in: path
           name: coin   # Note the name is the same as in the path
