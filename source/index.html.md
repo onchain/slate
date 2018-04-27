@@ -23,7 +23,7 @@ headingLevel: 2
 
 Base URLs:
 
-* <a href="https://onchain.io">https://onchain.io</a>
+* <a href="https://onchain.io/api">https://onchain.io/api</a>
 
 # Authentication
 
@@ -166,7 +166,7 @@ func main() {
 
 ```
 
-`GET /api/address/balance/{coin}/{address}`
+`GET /address/balance/{coin}/{address}`
 
 Returns the satoshi balance, usd balance and user viewable balance for an address
 
@@ -346,7 +346,7 @@ func main() {
 
 ```
 
-`GET /api/address/balances/{coin}/{addresses}`
+`GET /address/balances/{coin}/{addresses}`
 
 Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
 
@@ -548,7 +548,7 @@ func main() {
 
 ```
 
-`GET /api/address/history/{coin}/{addresses}`
+`GET /address/history/{coin}/{addresses}`
 
 Returns the transaction history for an address or addresses.
 
@@ -768,7 +768,7 @@ func main() {
 
 ```
 
-`GET /api/address/utxo/{coin}/{addresses}`
+`GET /address/utxo/{coin}/{addresses}`
 
 Returns the unspent outputs for an address or addresses.
 
@@ -963,7 +963,7 @@ func main() {
 
 ```
 
-`POST /api/transaction/send/{coin}/{rawtx}`
+`POST /transaction/send/{coin}/{rawtx}`
 
 Send a transaction onto the network.
 
