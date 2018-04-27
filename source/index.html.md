@@ -40,13 +40,13 @@ Base URLs:
 
 ```shell
 # You can also use wget
-curl -X GET https://onchain.io/api/address/{coin}/{addresses} \
+curl -X GET https://onchain.io/api/address/balance/{coin}/{address} \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://onchain.io/api/address/{coin}/{addresses} HTTP/1.1
+GET https://onchain.io/api/address/balance/{coin}/{address} HTTP/1.1
 Host: onchain.io
 
 Accept: application/json
@@ -60,7 +60,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://onchain.io/api/address/{coin}/{addresses}',
+  url: 'https://onchain.io/api/address/balance/{coin}/{address}',
   method: 'get',
 
   headers: headers,
@@ -79,7 +79,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/address/{coin}/{addresses}',
+fetch('https://onchain.io/api/address/balance/{coin}/{address}',
 {
   method: 'GET',
 
@@ -101,7 +101,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://onchain.io/api/address/{coin}/{addresses}',
+result = RestClient.get 'https://onchain.io/api/address/balance/{coin}/{address}',
   params: {
   }, headers: headers
 
@@ -115,7 +115,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://onchain.io/api/address/{coin}/{addresses}', params={
+r = requests.get('https://onchain.io/api/address/balance/{coin}/{address}', params={
 
 }, headers = headers)
 
@@ -124,7 +124,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/address/{coin}/{addresses}");
+URL obj = new URL("https://onchain.io/api/address/balance/{coin}/{address}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -156,7 +156,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://onchain.io/api/address/{coin}/{addresses}", data)
+    req, err := http.NewRequest("GET", "https://onchain.io/api/address/balance/{coin}/{address}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -166,16 +166,16 @@ func main() {
 
 ```
 
-`GET /api/address/{coin}/{addresses}`
+`GET /api/address/balance/{coin}/{address}`
 
-Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
+Returns the satoshi balance, usd balance and user viewable balance for an address
 
 <h3 id="Get Balance-parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
 |coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
-|addresses|path|string|true|A comma seperated list of public addresses|
+|address|path|string|true|The public address to lookup|
 
 #### Enumerated Values
 
@@ -207,6 +207,208 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the balances|[balance](#schemabalance)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get Balances
+
+<a id="opIdGet Balances"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://onchain.io/api/address/balances/{coin}/{addresses} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://onchain.io/api/address/balances/{coin}/{addresses} HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/address/balances/{coin}/{addresses}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/address/balances/{coin}/{addresses}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://onchain.io/api/address/balances/{coin}/{addresses}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://onchain.io/api/address/balances/{coin}/{addresses}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/address/balances/{coin}/{addresses}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://onchain.io/api/address/balances/{coin}/{addresses}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /api/address/balances/{coin}/{addresses}`
+
+Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
+
+<h3 id="Get Balances-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
+|addresses|path|string|true|A comma seperated list of public addresses|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|coin|bitcoin|
+|coin|litecoin|
+|coin|ethereum|
+|coin|bitcoin_private|
+|coin|bitcoin_gold|
+|coin|dash|
+|coin|zcash|
+|coin|zclassic|
+
+> Example responses
+
+```json
+{
+  "totals": {
+    "usd_balance": 120.34,
+    "balance": 27018060,
+    "unconfirmed_balance": 27018060,
+    "human_balance": 0.2701806,
+    "human_unconfirmed_balance": 0.2701806
+  },
+  "addresses": {
+    "property1": [
+      {
+        "usd_balance": 120.34,
+        "balance": 27018060,
+        "unconfirmed_balance": 27018060,
+        "human_balance": 0.2701806,
+        "human_unconfirmed_balance": 0.2701806
+      }
+    ],
+    "property2": [
+      {
+        "usd_balance": 120.34,
+        "balance": 27018060,
+        "unconfirmed_balance": 27018060,
+        "human_balance": 0.2701806,
+        "human_unconfirmed_balance": 0.2701806
+      }
+    ]
+  }
+}
+```
+
+<h3 id="Get Balances-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the balances|[balances](#schemabalances)|
 
 <aside class="success">
 This operation does not require authentication
@@ -850,6 +1052,82 @@ This operation does not require authentication
 |unconfirmed_balance|integer|false|No description|
 |human_balance|number|false|No description|
 |human_unconfirmed_balance|number|false|No description|
+
+<h2 id="tocSaddresses">addresses</h2>
+
+<a id="schemaaddresses"></a>
+
+```json
+{
+  "property1": [
+    {
+      "usd_balance": 120.34,
+      "balance": 27018060,
+      "unconfirmed_balance": 27018060,
+      "human_balance": 0.2701806,
+      "human_unconfirmed_balance": 0.2701806
+    }
+  ],
+  "property2": [
+    {
+      "usd_balance": 120.34,
+      "balance": 27018060,
+      "unconfirmed_balance": 27018060,
+      "human_balance": 0.2701806,
+      "human_unconfirmed_balance": 0.2701806
+    }
+  ]
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|**additionalProperties**|array|false|No description|
+
+<h2 id="tocSbalances">balances</h2>
+
+<a id="schemabalances"></a>
+
+```json
+{
+  "totals": {
+    "usd_balance": 120.34,
+    "balance": 27018060,
+    "unconfirmed_balance": 27018060,
+    "human_balance": 0.2701806,
+    "human_unconfirmed_balance": 0.2701806
+  },
+  "addresses": {
+    "property1": [
+      {
+        "usd_balance": 120.34,
+        "balance": 27018060,
+        "unconfirmed_balance": 27018060,
+        "human_balance": 0.2701806,
+        "human_unconfirmed_balance": 0.2701806
+      }
+    ],
+    "property2": [
+      {
+        "usd_balance": 120.34,
+        "balance": 27018060,
+        "unconfirmed_balance": 27018060,
+        "human_balance": 0.2701806,
+        "human_unconfirmed_balance": 0.2701806
+      }
+    ]
+  }
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|totals|[balance](#schemabalance)|false|No description|
+|addresses|[addresses](#schemaaddresses)|false|No description|
 
 <h2 id="tocSvins">vins</h2>
 

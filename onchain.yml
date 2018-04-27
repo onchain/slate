@@ -1,9 +1,11 @@
 openapi: 3.0.0
+
 info:
   title: ONCHAIN.IO API overview
   version: v2
+  
 servers:
-  - url: https://onchain.io
+  - url: https://onchain.io/api
     description: Main production server
 
 
@@ -46,6 +48,21 @@ components:
         human_unconfirmed_balance:
           type: number
           example: 0.2701806
+          
+    addresses:
+      type: object
+      additionalProperties:
+        items:
+          $ref: '#/components/schemas/balance'
+    
+    
+    balances:
+      type: object
+      properties:
+        totals:
+          $ref: '#/components/schemas/balance'
+        addresses:
+          $ref: '#/components/schemas/addresses'
           
     vins:
       type: object
@@ -122,7 +139,36 @@ components:
             $ref: '#/components/schemas/tx'
     
 paths:
-  /api/address/{coin}/{addresses}:
+  /address/balance/{coin}/{address}:
+    get:
+      tags:
+        - Address API
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          type: string
+          schema:
+            $ref: '#/components/schemas/coin'
+          description: The name of the coin i.e. bitcoin
+        - in: path
+          name: address   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The public address to lookup
+      operationId: Get Balance
+      summary: Get Balance
+      description: Returns the satoshi balance, usd balance and user viewable balance for an address
+      responses:
+        '200':
+          description: Returns the balances
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/balance"
+                
+  /address/balances/{coin}/{addresses}:
     get:
       tags:
         - Address API
@@ -140,8 +186,8 @@ paths:
           schema:
             type: string
           description: A comma seperated list of public addresses
-      operationId: Get Balance
-      summary: Get Balance
+      operationId: Get Balances
+      summary: Get Balances
       description: Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
       responses:
         '200':
@@ -149,9 +195,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/balance"
+                $ref: "#/components/schemas/balances"
             
-  /api/address/history/{coin}/{addresses}:
+  /address/history/{coin}/{addresses}:
     get:
       tags:
         - Address API
@@ -182,7 +228,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/history"
                   
-  /api/address/utxo/{coin}/{addresses}:
+  /address/utxo/{coin}/{addresses}:
     get:
       tags:
         - Address API
@@ -213,7 +259,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/utxo"
                   
-  /api/transaction/send/{coin}/{rawtx}:
+  /transaction/send/{coin}/{rawtx}:
     post:
       tags:
         - Transaction API
