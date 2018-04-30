@@ -182,6 +182,7 @@ Returns the satoshi balance, usd balance and user viewable balance for an addres
 |Parameter|Value|
 |---|---|
 |coin|bitcoin|
+|coin|testnet3|
 |coin|litecoin|
 |coin|ethereum|
 |coin|bitcoin_private|
@@ -362,6 +363,7 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 |Parameter|Value|
 |---|---|
 |coin|bitcoin|
+|coin|testnet3|
 |coin|litecoin|
 |coin|ethereum|
 |coin|bitcoin_private|
@@ -381,16 +383,7 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
     "human_balance": 0.2701806,
     "human_unconfirmed_balance": 0.2701806
   },
-  "addresses": [
-    {
-      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
-      "usd_balance": 120.34,
-      "balance": 27018060,
-      "unconfirmed_balance": 27018060,
-      "human_balance": 0.2701806,
-      "human_unconfirmed_balance": 0.2701806
-    }
-  ]
+  "addresses": []
 }
 ```
 
@@ -554,6 +547,7 @@ Returns the transaction history for an address or addresses.
 |Parameter|Value|
 |---|---|
 |coin|bitcoin|
+|coin|testnet3|
 |coin|litecoin|
 |coin|ethereum|
 |coin|bitcoin_private|
@@ -774,6 +768,7 @@ Returns the unspent outputs for an address or addresses.
 |Parameter|Value|
 |---|---|
 |coin|bitcoin|
+|coin|testnet3|
 |coin|litecoin|
 |coin|ethereum|
 |coin|bitcoin_private|
@@ -969,6 +964,7 @@ Send a transaction onto the network.
 |Parameter|Value|
 |---|---|
 |coin|bitcoin|
+|coin|testnet3|
 |coin|litecoin|
 |coin|ethereum|
 |coin|bitcoin_private|
@@ -1043,21 +1039,19 @@ This operation does not require authentication
 |human_balance|number|false|No description|
 |human_unconfirmed_balance|number|false|No description|
 
-<h2 id="tocSaddresses">addresses</h2>
+<h2 id="tocSaddr_balance">addr_balance</h2>
 
-<a id="schemaaddresses"></a>
+<a id="schemaaddr_balance"></a>
 
 ```json
-[
-  {
-    "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
-    "usd_balance": 120.34,
-    "balance": 27018060,
-    "unconfirmed_balance": 27018060,
-    "human_balance": 0.2701806,
-    "human_unconfirmed_balance": 0.2701806
-  }
-]
+{
+  "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+  "usd_balance": 120.34,
+  "balance": 27018060,
+  "unconfirmed_balance": 27018060,
+  "human_balance": 0.2701806,
+  "human_unconfirmed_balance": 0.2701806
+}
 ```
 
 ### Properties
@@ -1084,16 +1078,7 @@ This operation does not require authentication
     "human_balance": 0.2701806,
     "human_unconfirmed_balance": 0.2701806
   },
-  "addresses": [
-    {
-      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
-      "usd_balance": 120.34,
-      "balance": 27018060,
-      "unconfirmed_balance": 27018060,
-      "human_balance": 0.2701806,
-      "human_unconfirmed_balance": 0.2701806
-    }
-  ]
+  "addresses": []
 }
 ```
 
@@ -1102,7 +1087,7 @@ This operation does not require authentication
 |Name|Type|Required|Description|
 |---|---|---|---|
 |totals|[balance](#schemabalance)|false|No description|
-|addresses|[addresses](#schemaaddresses)|false|No description|
+|addresses|[[#/definitions/addr_balance](#schema#/definitions/addr_balance)]|false|No description|
 
 <h2 id="tocSvins">vins</h2>
 

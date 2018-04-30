@@ -22,6 +22,7 @@ components:
     coin:
       enum:
         - bitcoin
+        - testnet3
         - litecoin
         - ethereum
         - bitcoin_private
