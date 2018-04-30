@@ -559,60 +559,37 @@ Returns the transaction history for an address or addresses.
 > Example responses
 
 ```json
-[
-  {
-    "total_txs": 37000,
-    "txs": [
-      {
-        "blockheight": 48138,
-        "time": 1524579200,
-        "total_out": 1,
-        "total_in": 1,
-        "fees": 40000,
-        "vins": [
-          {
-            "amount": 395260,
-            "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-          }
-        ],
-        "vouts": [
-          {
-            "amount": 395260,
-            "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-          }
-        ]
-      }
-    ]
-  }
-]
+{
+  "total_txs": 37000,
+  "txs": [
+    {
+      "blockheight": 48138,
+      "time": 1524579200,
+      "total_out": 1,
+      "total_in": 1,
+      "fees": 40000,
+      "vins": [
+        {
+          "amount": 395260,
+          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+        }
+      ],
+      "vouts": [
+        {
+          "amount": 395260,
+          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 <h3 id="Get History-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the transaction history for an address or addresses|Inline|
-
-<h3 id="Get History-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|*anonymous*|[[history](#schemahistory)]|false|No description|
-|» total_txs|integer|false|No description|
-|» txs|[[tx](#schematx)]|false|No description|
-|»» blockheight|integer|false|No description|
-|»» time|integer|false|No description|
-|»» total_out|integer|false|No description|
-|»» total_in|integer|false|No description|
-|»» fees|integer|false|No description|
-|»» vins|[[vins](#schemavins)]|false|No description|
-|»»» amount|integer|false|No description|
-|»»» address|string|false|No description|
-|»» vouts|[[vouts](#schemavouts)]|false|No description|
-|»»» amount|integer|false|No description|
-|»»» address|string|false|No description|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the transaction history for an address or addresses|[history](#schemahistory)|
 
 <aside class="success">
 This operation does not require authentication
