@@ -381,26 +381,16 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
     "human_balance": 0.2701806,
     "human_unconfirmed_balance": 0.2701806
   },
-  "addresses": {
-    "property1": [
-      {
-        "usd_balance": 120.34,
-        "balance": 27018060,
-        "unconfirmed_balance": 27018060,
-        "human_balance": 0.2701806,
-        "human_unconfirmed_balance": 0.2701806
-      }
-    ],
-    "property2": [
-      {
-        "usd_balance": 120.34,
-        "balance": 27018060,
-        "unconfirmed_balance": 27018060,
-        "human_balance": 0.2701806,
-        "human_unconfirmed_balance": 0.2701806
-      }
-    ]
-  }
+  "addresses": [
+    {
+      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+      "usd_balance": 120.34,
+      "balance": 27018060,
+      "unconfirmed_balance": 27018060,
+      "human_balance": 0.2701806,
+      "human_unconfirmed_balance": 0.2701806
+    }
+  ]
 }
 ```
 
@@ -1058,33 +1048,28 @@ This operation does not require authentication
 <a id="schemaaddresses"></a>
 
 ```json
-{
-  "property1": [
-    {
-      "usd_balance": 120.34,
-      "balance": 27018060,
-      "unconfirmed_balance": 27018060,
-      "human_balance": 0.2701806,
-      "human_unconfirmed_balance": 0.2701806
-    }
-  ],
-  "property2": [
-    {
-      "usd_balance": 120.34,
-      "balance": 27018060,
-      "unconfirmed_balance": 27018060,
-      "human_balance": 0.2701806,
-      "human_unconfirmed_balance": 0.2701806
-    }
-  ]
-}
+[
+  {
+    "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+    "usd_balance": 120.34,
+    "balance": 27018060,
+    "unconfirmed_balance": 27018060,
+    "human_balance": 0.2701806,
+    "human_unconfirmed_balance": 0.2701806
+  }
+]
 ```
 
 ### Properties
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|**additionalProperties**|array|false|No description|
+|address|string|false|No description|
+|usd_balance|integer|false|No description|
+|balance|integer|false|No description|
+|unconfirmed_balance|integer|false|No description|
+|human_balance|number|false|No description|
+|human_unconfirmed_balance|number|false|No description|
 
 <h2 id="tocSbalances">balances</h2>
 
@@ -1099,26 +1084,16 @@ This operation does not require authentication
     "human_balance": 0.2701806,
     "human_unconfirmed_balance": 0.2701806
   },
-  "addresses": {
-    "property1": [
-      {
-        "usd_balance": 120.34,
-        "balance": 27018060,
-        "unconfirmed_balance": 27018060,
-        "human_balance": 0.2701806,
-        "human_unconfirmed_balance": 0.2701806
-      }
-    ],
-    "property2": [
-      {
-        "usd_balance": 120.34,
-        "balance": 27018060,
-        "unconfirmed_balance": 27018060,
-        "human_balance": 0.2701806,
-        "human_unconfirmed_balance": 0.2701806
-      }
-    ]
-  }
+  "addresses": [
+    {
+      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+      "usd_balance": 120.34,
+      "balance": 27018060,
+      "unconfirmed_balance": 27018060,
+      "human_balance": 0.2701806,
+      "human_unconfirmed_balance": 0.2701806
+    }
+  ]
 }
 ```
 

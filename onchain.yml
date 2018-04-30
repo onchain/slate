@@ -49,12 +49,27 @@ components:
           type: number
           example: 0.2701806
           
-    addresses:
+    addr_balance:
       type: object
-      additionalProperties:
-        items:
-          $ref: '#/components/schemas/balance'
-    
+      properties:
+        address:
+          type: string
+          example: "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY"
+        usd_balance:
+          type: integer
+          example: 120.34
+        balance:
+          type: integer
+          example: 27018060
+        unconfirmed_balance:
+          type: integer
+          example: 27018060
+        human_balance:
+          type: number
+          example: 0.2701806
+        human_unconfirmed_balance:
+          type: number
+          example: 0.2701806
     
     balances:
       type: object
@@ -62,7 +77,9 @@ components:
         totals:
           $ref: '#/components/schemas/balance'
         addresses:
-          $ref: '#/components/schemas/addresses'
+          items:
+            $ref: '#/definitions/addr_balance'
+          type: array
           
     vins:
       type: object
