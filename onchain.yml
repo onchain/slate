@@ -19,6 +19,9 @@ components:
       
   schemas:
 
+    # We get warnings as swagger 2 doesn't support reusable enums.
+    # We have to add the type: string to the coin paramewter
+    # or the code generation would not work.
     coin:
       enum:
         - bitcoin
@@ -79,7 +82,7 @@ components:
           $ref: '#/components/schemas/balance'
         addresses:
           items:
-            $ref: '#/definitions/addr_balance'
+            $ref: '#/components/schemas/addr_balance'
           type: array
           
     vins:
