@@ -383,7 +383,16 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
     "human_balance": 0.2701806,
     "human_unconfirmed_balance": 0.2701806
   },
-  "addresses": []
+  "addresses": [
+    {
+      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+      "usd_balance": 120.34,
+      "balance": 27018060,
+      "unconfirmed_balance": 27018060,
+      "human_balance": 0.2701806,
+      "human_unconfirmed_balance": 0.2701806
+    }
+  ]
 }
 ```
 
@@ -1055,7 +1064,16 @@ This operation does not require authentication
     "human_balance": 0.2701806,
     "human_unconfirmed_balance": 0.2701806
   },
-  "addresses": []
+  "addresses": [
+    {
+      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+      "usd_balance": 120.34,
+      "balance": 27018060,
+      "unconfirmed_balance": 27018060,
+      "human_balance": 0.2701806,
+      "human_unconfirmed_balance": 0.2701806
+    }
+  ]
 }
 ```
 
@@ -1064,7 +1082,7 @@ This operation does not require authentication
 |Name|Type|Required|Description|
 |---|---|---|---|
 |totals|[balance](#schemabalance)|false|No description|
-|addresses|[[#/definitions/addr_balance](#schema#/definitions/addr_balance)]|false|No description|
+|addresses|[[addr_balance](#schemaaddr_balance)]|false|No description|
 
 <h2 id="tocSvins">vins</h2>
 
