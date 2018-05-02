@@ -746,7 +746,7 @@ This operation does not require authentication
 
 ## Create Unsigned Transaction
 
-<a id="opIdSend TX"></a>
+<a id="opIdCreate TX"></a>
 
 > Code samples
 
@@ -923,7 +923,7 @@ This operation does not require authentication
 
 ## Sign and Send a Transaction
 
-<a id="opIdSend TX"></a>
+<a id="opIdSign and send TX"></a>
 
 > Code samples
 
