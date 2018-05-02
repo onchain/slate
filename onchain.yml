@@ -339,7 +339,7 @@ paths:
           name: amount   
           required: true
           schema:
-            type: string
+            type: integer
           description: The amount we wish to send.
           example: 80000
         - in: query
@@ -357,10 +357,10 @@ paths:
         - in: query
           name: minersFee   
           schema:
-            type: string
+            type: integer
           description: The amount to send to the miners.
           example: 10000
-      operationId: Create TX
+      operationId: Create
       summary: Create Unsigned Transaction
       description: Create an unsigned transaction
       responses:
@@ -397,7 +397,7 @@ paths:
             items:
               $ref: "#/components/schemas/signature"
           description: The raw unsigned transaction as a hex string
-      operationId: Sign and send TX
+      operationId: Sign and send
       summary: Sign and Send a Transaction
       description: Sign and send transaction onto the network.
       responses:
@@ -432,7 +432,7 @@ paths:
           schema:
             type: string
           description: The raw signed transaction as a hex string
-      operationId: Send TX
+      operationId: Send Raw
       summary: Send Raw Transaction
       description: Send a transaction onto the network.
       responses:

@@ -746,7 +746,7 @@ This operation does not require authentication
 
 ## Create Unsigned Transaction
 
-<a id="opIdCreate TX"></a>
+<a id="opIdCreate"></a>
 
 > Code samples
 
@@ -817,7 +817,7 @@ result = RestClient.post 'https://onchain.io/api/transaction/create/{coin}',
   params: {
   'to' => 'string',
 'from' => 'string',
-'amount' => 'string'
+'amount' => 'integer'
 }, headers: headers
 
 p JSON.parse(result)
@@ -892,10 +892,10 @@ Create an unsigned transaction
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |to|query|string|true|The address to send coins to.|
 |from|query|string|true|The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met.|
-|amount|query|string|true|The amount we wish to send.|
+|amount|query|integer|true|The amount we wish to send.|
 |feeAddress|query|string|false|An address to send fees to.|
 |feeAmount|query|string|false|The amount of fees to send.|
-|minersFee|query|string|false|The amount to send to the miners.|
+|minersFee|query|integer|false|The amount to send to the miners.|
 
 > Example responses
 
@@ -923,7 +923,7 @@ This operation does not require authentication
 
 ## Sign and Send a Transaction
 
-<a id="opIdSign and send TX"></a>
+<a id="opIdSign and send"></a>
 
 > Code samples
 
@@ -1104,7 +1104,7 @@ This operation does not require authentication
 
 ## Send Raw Transaction
 
-<a id="opIdSend TX"></a>
+<a id="opIdSend Raw"></a>
 
 > Code samples
 
