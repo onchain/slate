@@ -158,6 +158,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/tx'
+            
+    hashes_to_sign:
+      type: object
+      properties:
+        tx:
+          type: string
+          example: 02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20
+        hashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/hash_to_sign'
+            
+    hash_to_sign:
+      type: object
+      properties:
+        address:
+          type: string
+          example: mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG
+        hash:
+          type: string
+          example: 7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db
+            
+    signature:
+      type: object
+      properties:
+        hash:
+          type: string
+          example: 7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db
+        signature:
+          type: string
+          example: 7
     
 paths:
   /address/balance/{coin}/{address}:
@@ -168,9 +199,9 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
-          type: string
           schema:
             $ref: '#/components/schemas/coin'
+          example: testnet3
           description: The name of the coin i.e. bitcoin
         - in: path
           name: address   # Note the name is the same as in the path
@@ -197,7 +228,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
-          type: string
+          example: testnet3
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
@@ -226,7 +257,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
-          type: string
+          example: testnet3
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
@@ -255,7 +286,7 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
-          type: string
+          example: testnet3
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
@@ -278,7 +309,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/utxo"
                   
-  /transaction/send/{coin}/{rawtx}:
+  /transaction/create/{coin}:
     post:
       tags:
         - Transaction API
@@ -286,18 +317,123 @@ paths:
         - in: path
           name: coin   # Note the name is the same as in the path
           required: true
-          type: string
+          example: testnet3
           schema:
             $ref: '#/components/schemas/coin'
           description: The name of the coin i.e. bitcoin
+        - in: query
+          name: to   
+          required: true
+          schema:
+            type: string
+          description: The address to send coins to.
+          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
+        - in: query
+          name: from   
+          required: true
+          schema:
+            type: string
+          description: The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met.
+          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
+        - in: query
+          name: amount   
+          required: true
+          schema:
+            type: string
+          description: The amount we wish to send.
+          example: 80000
+        - in: query
+          name: feeAddress   
+          schema:
+            type: string
+          description: An address to send fees to.
+          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
+        - in: query
+          name: feeAmount   
+          schema:
+            type: string
+          description: The amount of fees to send.
+          example: 10000
+        - in: query
+          name: minersFee   
+          schema:
+            type: string
+          description: The amount to send to the miners.
+          example: 10000
+      operationId: Send TX
+      summary: Create Unsigned Transaction
+      description: Create an unsigned transaction
+      responses:
+        '200':
+          description: The unsigned transaction in hex format and a list of hashes that need signatures.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/hashes_to_sign"
+                  
+  /transaction/sign_and_send/{coin}:
+    post:
+      tags:
+        - Transaction API
+      parameters:
         - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          example: testnet3
+          schema:
+            $ref: '#/components/schemas/coin'
+          description: The name of the coin i.e. bitcoin
+        - in: query
+          name: tx   
+          required: true
+          schema:
+            type: string
+          description: The raw unsigned transaction as a hex string
+        - in: query
+          name: signatures   
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/signature"
+          description: The raw unsigned transaction as a hex string
+      operationId: Send TX
+      summary: Sign and Send a Transaction
+      description: Sign and send transaction onto the network.
+      responses:
+        default:
+          description: Send a transaction onto the network.
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749
+                  
+  /transaction/send_raw/{coin}:
+    post:
+      tags:
+        - Transaction API
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          example: testnet3
+          schema:
+            $ref: '#/components/schemas/coin'
+          description: The name of the coin i.e. bitcoin
+        - in: query
           name: rawtx   
           required: true
           schema:
             type: string
           description: The raw signed transaction as a hex string
       operationId: Send TX
-      summary: Send Transaction
+      summary: Send Raw Transaction
       description: Send a transaction onto the network.
       responses:
         default:

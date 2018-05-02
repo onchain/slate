@@ -174,22 +174,8 @@ Returns the satoshi balance, usd balance and user viewable balance for an addres
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
 |address|path|string|true|The public address to lookup|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|coin|bitcoin|
-|coin|testnet3|
-|coin|litecoin|
-|coin|ethereum|
-|coin|bitcoin_private|
-|coin|bitcoin_gold|
-|coin|dash|
-|coin|zcash|
-|coin|zclassic|
 
 > Example responses
 
@@ -355,22 +341,8 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|coin|bitcoin|
-|coin|testnet3|
-|coin|litecoin|
-|coin|ethereum|
-|coin|bitcoin_private|
-|coin|bitcoin_gold|
-|coin|dash|
-|coin|zcash|
-|coin|zclassic|
 
 > Example responses
 
@@ -548,22 +520,8 @@ Returns the transaction history for an address or addresses.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|coin|bitcoin|
-|coin|testnet3|
-|coin|litecoin|
-|coin|ethereum|
-|coin|bitcoin_private|
-|coin|bitcoin_gold|
-|coin|dash|
-|coin|zcash|
-|coin|zclassic|
 
 > Example responses
 
@@ -746,22 +704,8 @@ Returns the unspent outputs for an address or addresses.
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|coin|bitcoin|
-|coin|testnet3|
-|coin|litecoin|
-|coin|ethereum|
-|coin|bitcoin_private|
-|coin|bitcoin_gold|
-|coin|dash|
-|coin|zcash|
-|coin|zclassic|
 
 > Example responses
 
@@ -800,7 +744,7 @@ This operation does not require authentication
 
 <h1 id="ONCHAIN.IO-API-overview-Transaction-API">Transaction API</h1>
 
-## Send Transaction
+## Create Unsigned Transaction
 
 <a id="opIdSend TX"></a>
 
@@ -808,13 +752,13 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/transaction/send/{coin}/{rawtx} \
+curl -X POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/transaction/send/{coin}/{rawtx} HTTP/1.1
+POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 HTTP/1.1
 Host: onchain.io
 
 Accept: application/json
@@ -828,9 +772,9 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://onchain.io/api/transaction/send/{coin}/{rawtx}',
+  url: 'https://onchain.io/api/transaction/create/{coin}',
   method: 'post',
-
+  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -847,7 +791,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/transaction/send/{coin}/{rawtx}',
+fetch('https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
 {
   method: 'POST',
 
@@ -869,9 +813,12 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://onchain.io/api/transaction/send/{coin}/{rawtx}',
+result = RestClient.post 'https://onchain.io/api/transaction/create/{coin}',
   params: {
-  }, headers: headers
+  'to' => 'string',
+'from' => 'string',
+'amount' => 'string'
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -883,8 +830,8 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://onchain.io/api/transaction/send/{coin}/{rawtx}', params={
-
+r = requests.post('https://onchain.io/api/transaction/create/{coin}', params={
+  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'from': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'amount': '80000'
 }, headers = headers)
 
 print r.json()
@@ -892,7 +839,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/transaction/send/{coin}/{rawtx}");
+URL obj = new URL("https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -924,7 +871,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://onchain.io/api/transaction/send/{coin}/{rawtx}", data)
+    req, err := http.NewRequest("POST", "https://onchain.io/api/transaction/create/{coin}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -934,30 +881,198 @@ func main() {
 
 ```
 
-`POST /transaction/send/{coin}/{rawtx}`
+`POST /transaction/create/{coin}`
 
-Send a transaction onto the network.
+Create an unsigned transaction
 
-<h3 id="Send Transaction-parameters">Parameters</h3>
+<h3 id="Create Unsigned Transaction-parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|[coin](#schemacoin)|true|The name of the coin i.e. bitcoin|
-|rawtx|path|string|true|The raw signed transaction as a hex string|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
+|to|query|string|true|The address to send coins to.|
+|from|query|string|true|The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met.|
+|amount|query|string|true|The amount we wish to send.|
+|feeAddress|query|string|false|An address to send fees to.|
+|feeAmount|query|string|false|The amount of fees to send.|
+|minersFee|query|string|false|The amount to send to the miners.|
 
-#### Enumerated Values
+> Example responses
 
-|Parameter|Value|
-|---|---|
-|coin|bitcoin|
-|coin|testnet3|
-|coin|litecoin|
-|coin|ethereum|
-|coin|bitcoin_private|
-|coin|bitcoin_gold|
-|coin|dash|
-|coin|zcash|
-|coin|zclassic|
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "hashes": [
+    {
+      "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
+      "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db"
+    }
+  ]
+}
+```
+
+<h3 id="Create Unsigned Transaction-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and a list of hashes that need signatures.|[hashes_to_sign](#schemahashes_to_sign)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Sign and Send a Transaction
+
+<a id="opIdSend TX"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/transaction/sign_and_send/{coin}',
+  method: 'post',
+  data: '?tx=string&signatures=%5Bobject%20Object%5D',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/transaction/sign_and_send/{coin}',
+  params: {
+  'tx' => 'string',
+'signatures' => 'array[object]'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/transaction/sign_and_send/{coin}', params={
+  'tx': 'string',  'signatures': [
+  {
+    "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "signature": 7
+  }
+]
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/transaction/sign_and_send/{coin}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /transaction/sign_and_send/{coin}`
+
+Sign and send transaction onto the network.
+
+<h3 id="Sign and Send a Transaction-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
+|tx|query|string|true|The raw unsigned transaction as a hex string|
+|signatures|query|array[object]|true|The raw unsigned transaction as a hex string|
 
 > Example responses
 
@@ -968,13 +1083,187 @@ Send a transaction onto the network.
 }
 ```
 
-<h3 id="Send Transaction-responses">Responses</h3>
+<h3 id="Sign and Send a Transaction-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |default|Default|Send a transaction onto the network.|Inline|
 
-<h3 id="Send Transaction-responseschema">Response Schema</h3>
+<h3 id="Sign and Send a Transaction-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» status_code|integer|false|No description|
+|» message|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Send Raw Transaction
+
+<a id="opIdSend TX"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/transaction/send_raw/{coin}?rawtx=string \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/transaction/send_raw/{coin}?rawtx=string HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/transaction/send_raw/{coin}',
+  method: 'post',
+  data: '?rawtx=string',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/transaction/send_raw/{coin}?rawtx=string',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/transaction/send_raw/{coin}',
+  params: {
+  'rawtx' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/transaction/send_raw/{coin}', params={
+  'rawtx': 'string'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/transaction/send_raw/{coin}?rawtx=string");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/transaction/send_raw/{coin}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /transaction/send_raw/{coin}`
+
+Send a transaction onto the network.
+
+<h3 id="Send Raw Transaction-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
+|rawtx|query|string|true|The raw signed transaction as a hex string|
+
+> Example responses
+
+```json
+{
+  "status_code": 200,
+  "message": "3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749"
+}
+```
+
+<h3 id="Send Raw Transaction-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Send a transaction onto the network.|Inline|
+
+<h3 id="Send Raw Transaction-responseschema">Response Schema</h3>
 
 Status Code **default**
 
@@ -1217,4 +1506,63 @@ This operation does not require authentication
 |---|---|---|---|
 |total_txs|integer|false|No description|
 |txs|[[tx](#schematx)]|false|No description|
+
+<h2 id="tocShashes_to_sign">hashes_to_sign</h2>
+
+<a id="schemahashes_to_sign"></a>
+
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "hashes": [
+    {
+      "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
+      "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db"
+    }
+  ]
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|tx|string|false|No description|
+|hashes|[[hash_to_sign](#schemahash_to_sign)]|false|No description|
+
+<h2 id="tocShash_to_sign">hash_to_sign</h2>
+
+<a id="schemahash_to_sign"></a>
+
+```json
+{
+  "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
+  "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db"
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|address|string|false|No description|
+|hash|string|false|No description|
+
+<h2 id="tocSsignature">signature</h2>
+
+<a id="schemasignature"></a>
+
+```json
+{
+  "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+  "signature": 7
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|hash|string|false|No description|
+|signature|string|false|No description|
 
