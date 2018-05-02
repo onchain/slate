@@ -360,7 +360,7 @@ paths:
             type: string
           description: The amount to send to the miners.
           example: 10000
-      operationId: Send TX
+      operationId: Create TX
       summary: Create Unsigned Transaction
       description: Create an unsigned transaction
       responses:
@@ -397,7 +397,7 @@ paths:
             items:
               $ref: "#/components/schemas/signature"
           description: The raw unsigned transaction as a hex string
-      operationId: Send TX
+      operationId: Sign and send TX
       summary: Sign and Send a Transaction
       description: Sign and send transaction onto the network.
       responses:
