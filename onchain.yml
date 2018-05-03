@@ -176,9 +176,9 @@ components:
         address:
           type: string
           example: mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG
-        hash:
+        hash_to_sign:
           type: string
-          example: 7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db
+          example: 004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7
             
     signature:
       type: object

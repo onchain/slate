@@ -905,7 +905,7 @@ Create an unsigned transaction
   "hashes": [
     {
       "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
-      "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db"
+      "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
     }
   ]
 }
@@ -1517,7 +1517,7 @@ This operation does not require authentication
   "hashes": [
     {
       "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
-      "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db"
+      "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
     }
   ]
 }
@@ -1537,7 +1537,7 @@ This operation does not require authentication
 ```json
 {
   "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
-  "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db"
+  "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
 }
 ```
 
@@ -1546,7 +1546,7 @@ This operation does not require authentication
 |Name|Type|Required|Description|
 |---|---|---|---|
 |address|string|false|No description|
-|hash|string|false|No description|
+|hash_to_sign|string|false|No description|
 
 <h2 id="tocSsignature">signature</h2>
 
