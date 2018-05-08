@@ -752,13 +752,13 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 \
+curl -X POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49&amount=80000 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 HTTP/1.1
+POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49&amount=80000 HTTP/1.1
 Host: onchain.io
 
 Accept: application/json
@@ -774,7 +774,7 @@ var headers = {
 $.ajax({
   url: 'https://onchain.io/api/transaction/create/{coin}',
   method: 'post',
-  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
+  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49&amount=80000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -791,7 +791,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
+fetch('https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49&amount=80000',
 {
   method: 'POST',
 
@@ -831,7 +831,7 @@ headers = {
 }
 
 r = requests.post('https://onchain.io/api/transaction/create/{coin}', params={
-  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'from': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'amount': '80000'
+  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'from': '036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49',  'amount': '80000'
 }, headers = headers)
 
 print r.json()
@@ -839,7 +839,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000");
+URL obj = new URL("https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49&amount=80000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -883,7 +883,7 @@ func main() {
 
 `POST /transaction/create/{coin}`
 
-Create an unsigned transaction
+Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed.
 
 <h3 id="Create Unsigned Transaction-parameters">Parameters</h3>
 
@@ -891,7 +891,7 @@ Create an unsigned transaction
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |to|query|string|true|The address to send coins to.|
-|from|query|string|true|The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met.|
+|from|query|string|true|The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met. We use the public hex key of the address not the hash.|
 |amount|query|integer|true|The amount we wish to send.|
 |fee_address|query|string|false|An address to send fees to.|
 |fee_amount|query|string|false|The amount of fees to send.|
@@ -905,7 +905,7 @@ Create an unsigned transaction
   "hashes": [
     {
       "input_index": 0,
-      "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
       "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
     }
   ]
@@ -1011,7 +1011,9 @@ r = requests.post('https://onchain.io/api/transaction/sign_and_send/{coin}', par
   'tx': 'string',  'signatures': [
   {
     "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": 7
+    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+    "input_index": 0
   }
 ]
 }, headers = headers)
@@ -1073,7 +1075,7 @@ Sign and send transaction onto the network.
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |tx|query|string|true|The raw unsigned transaction as a hex string|
-|signatures|query|array[object]|true|The raw unsigned transaction as a hex string|
+|signatures|query|array[object]|true|The list of hashes returned by the create API with the corresponding signatures from your private keys.|
 
 > Example responses
 
@@ -1518,7 +1520,7 @@ This operation does not require authentication
   "hashes": [
     {
       "input_index": 0,
-      "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
       "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
     }
   ]
@@ -1539,7 +1541,7 @@ This operation does not require authentication
 ```json
 {
   "input_index": 0,
-  "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
+  "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
   "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
 }
 ```
@@ -1549,7 +1551,7 @@ This operation does not require authentication
 |Name|Type|Required|Description|
 |---|---|---|---|
 |input_index|integer|false|No description|
-|address|string|false|No description|
+|public_key|string|false|No description|
 |hash_to_sign|string|false|No description|
 
 <h2 id="tocSsignature">signature</h2>
@@ -1559,7 +1561,9 @@ This operation does not require authentication
 ```json
 {
   "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-  "signature": 7
+  "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+  "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+  "input_index": 0
 }
 ```
 
@@ -1569,4 +1573,6 @@ This operation does not require authentication
 |---|---|---|---|
 |hash|string|false|No description|
 |signature|string|false|No description|
+|public_key|string|false|No description|
+|input_index|integer|false|No description|
 

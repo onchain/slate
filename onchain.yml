@@ -176,9 +176,9 @@ components:
         input_index:
           type: integer
           example: 0
-        address:
+        public_key:
           type: string
-          example: mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG
+          example: 036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49
         hash_to_sign:
           type: string
           example: 004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7
@@ -191,7 +191,13 @@ components:
           example: 7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db
         signature:
           type: string
-          example: 7
+          example: 304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02
+        public_key:
+          type: string
+          example: 036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49
+        input_index:
+          type: integer
+          example: 0
     
 paths:
   /address/balance/{coin}/{address}:
@@ -336,8 +342,8 @@ paths:
           required: true
           schema:
             type: string
-          description: The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met.
-          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
+          description: The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met. We use the public hex key of the address not the hash. 
+          example: 036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49
         - in: query
           name: amount   
           required: true
@@ -365,7 +371,7 @@ paths:
           example: 10000
       operationId: Create
       summary: Create Unsigned Transaction
-      description: Create an unsigned transaction
+      description: Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed. 
       responses:
         '200':
           description: The unsigned transaction in hex format and a list of hashes that need signatures.
@@ -399,7 +405,7 @@ paths:
             type: array
             items:
               $ref: "#/components/schemas/signature"
-          description: The raw unsigned transaction as a hex string
+          description: The list of hashes returned by the create API with the corresponding signatures from your private keys.
       operationId: Sign and send
       summary: Sign and Send a Transaction
       description: Sign and send transaction onto the network.
