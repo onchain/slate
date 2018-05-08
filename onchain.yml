@@ -186,7 +186,7 @@ components:
     signature:
       type: object
       properties:
-        hash:
+        hash_to_sign:
           type: string
           example: 7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db
         signature:

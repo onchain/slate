@@ -1010,7 +1010,7 @@ headers = {
 r = requests.post('https://onchain.io/api/transaction/sign_and_send/{coin}', params={
   'tx': 'string',  'signatures': [
   {
-    "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
     "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
     "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
     "input_index": 0
@@ -1560,7 +1560,7 @@ This operation does not require authentication
 
 ```json
 {
-  "hash": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+  "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
   "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
   "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
   "input_index": 0
@@ -1571,7 +1571,7 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|hash|string|false|No description|
+|hash_to_sign|string|false|No description|
 |signature|string|false|No description|
 |public_key|string|false|No description|
 |input_index|integer|false|No description|
