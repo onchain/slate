@@ -893,9 +893,9 @@ Create an unsigned transaction
 |to|query|string|true|The address to send coins to.|
 |from|query|string|true|The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met.|
 |amount|query|integer|true|The amount we wish to send.|
-|feeAddress|query|string|false|An address to send fees to.|
-|feeAmount|query|string|false|The amount of fees to send.|
-|minersFee|query|integer|false|The amount to send to the miners.|
+|fee_address|query|string|false|An address to send fees to.|
+|fee_amount|query|string|false|The amount of fees to send.|
+|miners_fee|query|integer|false|The amount to send to the miners.|
 
 > Example responses
 

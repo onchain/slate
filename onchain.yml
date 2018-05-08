@@ -343,19 +343,19 @@ paths:
           description: The amount we wish to send.
           example: 80000
         - in: query
-          name: feeAddress   
+          name: fee_address   
           schema:
             type: string
           description: An address to send fees to.
           example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
         - in: query
-          name: feeAmount   
+          name: fee_amount   
           schema:
             type: string
           description: The amount of fees to send.
           example: 10000
         - in: query
-          name: minersFee   
+          name: miners_fee   
           schema:
             type: integer
           description: The amount to send to the miners.
