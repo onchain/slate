@@ -904,6 +904,7 @@ Create an unsigned transaction
   "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
   "hashes": [
     {
+      "input_index": 0,
       "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
       "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
     }
@@ -1516,6 +1517,7 @@ This operation does not require authentication
   "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
   "hashes": [
     {
+      "input_index": 0,
       "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
       "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
     }
@@ -1536,6 +1538,7 @@ This operation does not require authentication
 
 ```json
 {
+  "input_index": 0,
   "address": "mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG",
   "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
 }
@@ -1545,6 +1548,7 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
+|input_index|integer|false|No description|
 |address|string|false|No description|
 |hash_to_sign|string|false|No description|
 

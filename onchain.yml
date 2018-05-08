@@ -173,6 +173,9 @@ components:
     hash_to_sign:
       type: object
       properties:
+        input_index:
+          type: integer
+          example: 0
         address:
           type: string
           example: mmPSNLxR1KgG5o86AXEaaoiRxqjQJzyYYG
