@@ -930,13 +930,13 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D \
+curl -X POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D HTTP/1.1
+POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0 HTTP/1.1
 Host: onchain.io
 
 Accept: application/json
@@ -952,7 +952,7 @@ var headers = {
 $.ajax({
   url: 'https://onchain.io/api/transaction/sign_and_send/{coin}',
   method: 'post',
-  data: '?tx=string&signatures=%5Bobject%20Object%5D',
+  data: '?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -969,7 +969,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D',
+fetch('https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0',
 {
   method: 'POST',
 
@@ -994,7 +994,10 @@ headers = {
 result = RestClient.post 'https://onchain.io/api/transaction/sign_and_send/{coin}',
   params: {
   'tx' => 'string',
-'signatures' => 'array[object]'
+'public_keys' => 'array[string]',
+'signatures' => 'array[string]',
+'hashes_to_sign' => 'array[string]',
+'input_indexes' => 'array[integer]'
 }, headers: headers
 
 p JSON.parse(result)
@@ -1008,13 +1011,14 @@ headers = {
 }
 
 r = requests.post('https://onchain.io/api/transaction/sign_and_send/{coin}', params={
-  'tx': 'string',  'signatures': [
-  {
-    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
-    "input_index": 0
-  }
+  'tx': 'string',  'public_keys': [
+  "string"
+],  'signatures': [
+  "string"
+],  'hashes_to_sign': [
+  "string"
+],  'input_indexes': [
+  0
 ]
 }, headers = headers)
 
@@ -1023,7 +1027,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&signatures=%5Bobject%20Object%5D");
+URL obj = new URL("https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1075,7 +1079,10 @@ Sign and send transaction onto the network.
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |tx|query|string|true|The raw unsigned transaction as a hex string|
-|signatures|query|array[object]|true|The list of hashes returned by the create API with the corresponding signatures from your private keys.|
+|public_keys|query|array[string]|true|The list of public keys we are signing for.|
+|signatures|query|array[string]|true|The signatures generated for each.|
+|hashes_to_sign|query|array[string]|true|The list of hashes returned by the create API with the corresponding signatures from your private keys.|
+|input_indexes|query|array[integer]|true|The list of input indexes corresponding to the hashes and signatures.|
 
 > Example responses
 

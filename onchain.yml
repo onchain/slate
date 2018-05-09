@@ -399,13 +399,45 @@ paths:
             type: string
           description: The raw unsigned transaction as a hex string
         - in: query
+          name: public_keys   
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          description: The list of public keys we are signing for.
+          style: pipeDelimited
+          explode: false
+        - in: query
           name: signatures   
           required: true
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/signature"
+              type: string
+          description: The signatures generated for each.
+          style: pipeDelimited
+          explode: false
+        - in: query
+          name: hashes_to_sign   
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
           description: The list of hashes returned by the create API with the corresponding signatures from your private keys.
+          style: pipeDelimited
+          explode: false
+        - in: query
+          name: input_indexes 
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+          description: The list of input indexes corresponding to the hashes and signatures.
+          style: pipeDelimited
+          explode: false
       operationId: Sign and send
       summary: Sign and Send a Transaction
       description: Sign and send transaction onto the network.
