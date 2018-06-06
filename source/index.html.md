@@ -1286,6 +1286,354 @@ Status Code **default**
 This operation does not require authentication
 </aside>
 
+<h1 id="ONCHAIN.IO-API-overview-Ethereum-API">Ethereum API</h1>
+
+## Create Unsigned Transaction
+
+<a id="opIdCreate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/ethereum/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/ethereum/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000 HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/ethereum/create/',
+  method: 'post',
+  data: '?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/ethereum/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/ethereum/create/',
+  params: {
+  'to' => 'string',
+'from' => 'string',
+'amount' => 'integer'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/ethereum/create/', params={
+  'to': '2.5329069089123447e+76',  'from': '2.5329069089123447e+76',  'amount': '80000'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/ethereum/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/ethereum/create/", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /ethereum/create/`
+
+Create an unsigned transaction. OnChain returns the ethereum transaction in hex format along with a hash that would need to be signed.
+
+<h3 id="Create Unsigned Transaction-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|to|query|string|true|The address to send Ether to.|
+|from|query|string|true|The addresses we are sending ether from.|
+|amount|query|integer|true|The amount we wish to send in GWEI.|
+|gas_price|query|integer|false|The gas price to pay.|
+|gas_limit|query|integer|false|The gas limit to use.|
+
+> Example responses
+
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "hash": "955f74e31610aa78bf15d79ec4df4c36dc98e802f52002"
+}
+```
+
+<h3 id="Create Unsigned Transaction-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Sign and send transaction.
+
+<a id="opIdCreate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/ethereum/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/ethereum/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52 HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/ethereum/sign_and_send/',
+  method: 'post',
+  data: '?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/ethereum/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/ethereum/sign_and_send/',
+  params: {
+  'to' => 'string',
+'from' => 'string',
+'amount' => 'integer',
+'r' => 'string',
+'s' => 'string',
+'v' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/ethereum/sign_and_send/', params={
+  'to': '2.5329069089123447e+76',  'from': '2.5329069089123447e+76',  'amount': '80000',  'r': '37ffbebc90cd580b516d99cc53050e93a6cd5f',  's': '37ffbebc90cd580b516d99cc53050e93a6cd5f',  'v': '52'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/ethereum/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/ethereum/sign_and_send/", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /ethereum/sign_and_send/`
+
+Sign and send transaction onto the Ethereum network.
+
+<h3 id="Sign and send transaction.-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|to|query|string|true|The address to send Ether to.|
+|from|query|string|true|The addresses we are sending ether from.|
+|amount|query|integer|true|The amount we wish to send in GWEI.|
+|r|query|string|true|The signed r value.|
+|s|query|string|true|The signed r value.|
+|v|query|string|true|The signed r value.|
+|gas_price|query|integer|false|The gas price to pay.|
+|gas_limit|query|integer|false|The gas limit to use.|
+
+> Example responses
+
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "hash": "955f74e31610aa78bf15d79ec4df4c36dc98e802f52002"
+}
+```
+
+<h3 id="Sign and send transaction.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Schemas
 
 <h2 id="tocScoin">coin</h2>
@@ -1318,7 +1666,7 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|usd_balance|integer|false|No description|
+|usd_balance|number|false|No description|
 |balance|integer|false|No description|
 |unconfirmed_balance|integer|false|No description|
 |human_balance|number|false|No description|
@@ -1540,6 +1888,24 @@ This operation does not require authentication
 |---|---|---|---|
 |tx|string|false|No description|
 |hashes|[[hash_to_sign](#schemahash_to_sign)]|false|No description|
+
+<h2 id="tocSethereum_to_sign">ethereum_to_sign</h2>
+
+<a id="schemaethereum_to_sign"></a>
+
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "hash": "955f74e31610aa78bf15d79ec4df4c36dc98e802f52002"
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|tx|string|false|No description|
+|hash|string|false|No description|
 
 <h2 id="tocShash_to_sign">hash_to_sign</h2>
 

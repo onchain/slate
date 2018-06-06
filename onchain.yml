@@ -38,7 +38,7 @@ components:
       type: object
       properties:
         usd_balance:
-          type: integer
+          type: number
           example: 120.34
         balance:
           type: integer
@@ -169,6 +169,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/hash_to_sign'
+            
+    ethereum_to_sign:
+      type: object
+      properties:
+        tx:
+          type: string
+          example: 02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20
+        hash:
+          type: string
+          example: 955f74e31610aa78bf15d79ec4df4c36dc98e802f52002
             
     hash_to_sign:
       type: object
@@ -489,3 +499,125 @@ paths:
                   message:
                     type: string
                     example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749
+  
+                  
+  /ethereum/create/:
+    post:
+      tags:
+        - Ethereum API
+      parameters:
+        - in: query
+          name: to   
+          required: true
+          schema:
+            type: string
+          description: The address to send Ether to.
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: from   
+          required: true
+          schema:
+            type: string
+          description: The addresses we are sending ether from. 
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: amount   
+          required: true
+          schema:
+            type: integer
+          description: The amount we wish to send in GWEI.
+          example: 80000
+        - in: query
+          name: gas_price   
+          schema:
+            type: integer
+          description: The gas price to pay.
+          example: 10000
+        - in: query
+          name: gas_limit   
+          schema:
+            type: integer
+          description: The gas limit to use.
+          example: 10000
+      operationId: Create
+      summary: Create Unsigned Transaction
+      description: Create an unsigned transaction. OnChain returns the ethereum transaction in hex format along with a hash that would need to be signed. 
+      responses:
+        '200':
+          description: The unsigned transaction in hex format and the hash to sign.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ethereum_to_sign"
+                
+  
+                  
+  /ethereum/sign_and_send/:
+    post:
+      tags:
+        - Ethereum API
+      parameters:
+        - in: query
+          name: to   
+          required: true
+          schema:
+            type: string
+          description: The address to send Ether to.
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: from   
+          required: true
+          schema:
+            type: string
+          description: The addresses we are sending ether from. 
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: amount   
+          required: true
+          schema:
+            type: integer
+          description: The amount we wish to send in GWEI.
+          example: 80000
+        - in: query
+          name: r   
+          required: true
+          schema:
+            type: string
+          description: The signed r value.
+          example: 37ffbebc90cd580b516d99cc53050e93a6cd5f
+        - in: query
+          name: s   
+          required: true
+          schema:
+            type: string
+          description: The signed r value.
+          example: 37ffbebc90cd580b516d99cc53050e93a6cd5f
+        - in: query
+          name: v   
+          required: true
+          schema:
+            type: string
+          description: The signed r value.
+          example: 52
+        - in: query
+          name: gas_price   
+          schema:
+            type: integer
+          description: The gas price to pay.
+          example: 10000
+        - in: query
+          name: gas_limit   
+          schema:
+            type: integer
+          description: The gas limit to use.
+          example: 10000
+      operationId: Create
+      summary: Sign and send transaction.
+      description: Sign and send transaction onto the Ethereum network.
+      responses:
+        '200':
+          description: The unsigned transaction in hex format and the hash to sign.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ethereum_to_sign"
