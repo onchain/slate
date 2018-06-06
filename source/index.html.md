@@ -1460,7 +1460,7 @@ This operation does not require authentication
 
 ## Sign and send transaction.
 
-<a id="opIdCreate"></a>
+<a id="opIdSign and send"></a>
 
 > Code samples
 

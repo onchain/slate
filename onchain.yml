@@ -611,7 +611,7 @@ paths:
             type: integer
           description: The gas limit to use.
           example: 10000
-      operationId: Create
+      operationId: Sign and send
       summary: Sign and send transaction.
       description: Sign and send transaction onto the Ethereum network.
       responses:
