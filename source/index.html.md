@@ -1619,8 +1619,8 @@ Sign and send transaction onto the Ethereum network.
 
 ```json
 {
-  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
-  "hash_to_sign": "955f74e31610aa78bf15d79ec4df4c36dc98e802f52002"
+  "status_code": 200,
+  "message": "3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749"
 }
 ```
 
@@ -1628,7 +1628,16 @@ Sign and send transaction onto the Ethereum network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
+|default|Default|Send a transaction onto the network.|Inline|
+
+<h3 id="Sign and send transaction.-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» status_code|integer|false|No description|
+|» message|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
