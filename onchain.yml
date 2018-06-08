@@ -228,9 +228,21 @@ paths:
           schema:
             type: string
           description: The public address to lookup
+        - in: query
+          name: contract_id  
+          schema:
+            type: string
+          description: The contract ID of the ERC20 token.
+          example: 0x6a215b20025f5ba884dcd24f4a074c5b81d0184e
+        - in: query
+          name: decimal_places 
+          schema:
+            type: integer
+          description: The number of decimal places for this contract.
+          example: 18
       operationId: Get Balance
       summary: Get Balance
-      description: Returns the satoshi balance, usd balance and user viewable balance for an address
+      description: Returns the satoshi balance, usd balance and user viewable balance for an address. For ERC20 tokens you need to pass in the contract ID and the number of decimal places.
       responses:
         '200':
           description: Returns the balances
@@ -257,6 +269,18 @@ paths:
           schema:
             type: string
           description: A comma seperated list of public addresses
+        - in: query
+          name: contract_id  
+          schema:
+            type: string
+          description: The contract ID of the ERC20 token.
+          example: 0x6a215b20025f5ba884dcd24f4a074c5b81d0184e
+        - in: query
+          name: decimal_places 
+          schema:
+            type: integer
+          description: The number of decimal places for this contract.
+          example: 18
       operationId: Get Balances
       summary: Get Balances
       description: Returns the satoshi balance, usd balance and user viewable balance for a set of addresses
@@ -286,6 +310,18 @@ paths:
           schema:
             type: string
           description: A comma seperated list of public addresses
+        - in: query
+          name: contract_id  
+          schema:
+            type: string
+          description: The contract ID of the ERC20 token.
+          example: 0x6a215b20025f5ba884dcd24f4a074c5b81d0184e
+        - in: query
+          name: decimal_places 
+          schema:
+            type: integer
+          description: The number of decimal places for this contract.
+          example: 18
       operationId: Get History
       summary: Get History
       description: Returns the transaction history for an address or addresses.
@@ -578,6 +614,164 @@ paths:
             type: integer
           description: The amount we wish to send in GWEI.
           example: 80000
+        - in: query
+          name: r   
+          required: true
+          schema:
+            type: string
+          description: The signed r value.
+          example: 37ffbebc90cd580b516d99cc53050e93a6cd5f
+        - in: query
+          name: s   
+          required: true
+          schema:
+            type: string
+          description: The signed r value.
+          example: 37ffbebc90cd580b516d99cc53050e93a6cd5f
+        - in: query
+          name: v   
+          required: true
+          schema:
+            type: string
+          description: The signed r value.
+          example: 52
+        - in: query
+          name: gas_price   
+          schema:
+            type: integer
+          description: The gas price to pay.
+          example: 10000
+        - in: query
+          name: gas_limit   
+          schema:
+            type: integer
+          description: The gas limit to use.
+          example: 10000
+      operationId: Sign and send
+      summary: Sign and send transaction.
+      description: Sign and send transaction onto the Ethereum network.
+      responses:
+        default:
+          description: Send a transaction onto the network.
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749
+                    
+  
+  
+                  
+  /erc20/create/:
+    post:
+      tags:
+        - ERC20
+      parameters:
+        - in: query
+          name: to   
+          required: true
+          schema:
+            type: string
+          description: The address to send Ether to.
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: from   
+          required: true
+          schema:
+            type: string
+          description: The addresses we are sending ether from. 
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: amount   
+          required: true
+          schema:
+            type: integer
+          description: The amount we wish to send in GWEI.
+          example: 80000
+        - in: query
+          name: contract_id   
+          required: true
+          schema:
+            type: string
+          description: The contract ID of the ERC20 token.
+          example: 0x6a215b20025f5ba884dcd24f4a074c5b81d0184e
+        - in: query
+          name: decimal_places   
+          required: true
+          schema:
+            type: integer
+          description: The number of decimal places for this contract.
+          example: 18
+        - in: query
+          name: gas_price   
+          schema:
+            type: integer
+          description: The gas price to pay.
+          example: 10000
+        - in: query
+          name: gas_limit   
+          schema:
+            type: integer
+          description: The gas limit to use.
+          example: 10000
+      operationId: Create
+      summary: Create Unsigned Transaction
+      description: Create an unsigned transaction. OnChain returns the ethereum transaction in hex format along with a hash that would need to be signed. 
+      responses:
+        '200':
+          description: The unsigned transaction in hex format and the hash to sign.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ethereum_to_sign"
+                
+  
+                  
+  /erc20/sign_and_send/:
+    post:
+      tags:
+        - ERC20
+      parameters:
+        - in: query
+          name: to   
+          required: true
+          schema:
+            type: string
+          description: The address to send Ether to.
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: from   
+          required: true
+          schema:
+            type: string
+          description: The addresses we are sending ether from. 
+          example: 0x37ffbebc90cd580b516d99cc53050e93a6cd5ff2e4869bb0d41732986abd1926
+        - in: query
+          name: amount   
+          required: true
+          schema:
+            type: integer
+          description: The amount we wish to send in GWEI.
+          example: 80000
+        - in: query
+          name: contract_id   
+          required: true
+          schema:
+            type: string
+          description: The contract ID of the ERC20 token.
+          example: 0x6a215b20025f5ba884dcd24f4a074c5b81d0184e
+        - in: query
+          name: decimal_places   
+          required: true
+          schema:
+            type: integer
+          description: The number of decimal places for this contract.
+          example: 18
         - in: query
           name: r   
           required: true

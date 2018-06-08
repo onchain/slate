@@ -168,7 +168,7 @@ func main() {
 
 `GET /address/balance/{coin}/{address}`
 
-Returns the satoshi balance, usd balance and user viewable balance for an address
+Returns the satoshi balance, usd balance and user viewable balance for an address. For ERC20 tokens you need to pass in the contract ID and the number of decimal places.
 
 <h3 id="Get Balance-parameters">Parameters</h3>
 
@@ -176,6 +176,8 @@ Returns the satoshi balance, usd balance and user viewable balance for an addres
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |address|path|string|true|The public address to lookup|
+|contract_id|query|string|false|The contract ID of the ERC20 token.|
+|decimal_places|query|integer|false|The number of decimal places for this contract.|
 
 > Example responses
 
@@ -343,6 +345,8 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
+|contract_id|query|string|false|The contract ID of the ERC20 token.|
+|decimal_places|query|integer|false|The number of decimal places for this contract.|
 
 > Example responses
 
@@ -522,6 +526,8 @@ Returns the transaction history for an address or addresses.
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |addresses|path|string|true|A comma seperated list of public addresses|
+|contract_id|query|string|false|The contract ID of the ERC20 token.|
+|decimal_places|query|integer|false|The number of decimal places for this contract.|
 
 > Example responses
 
@@ -1609,6 +1615,371 @@ Sign and send transaction onto the Ethereum network.
 |to|query|string|true|The address to send Ether to.|
 |from|query|string|true|The addresses we are sending ether from.|
 |amount|query|integer|true|The amount we wish to send in GWEI.|
+|r|query|string|true|The signed r value.|
+|s|query|string|true|The signed r value.|
+|v|query|string|true|The signed r value.|
+|gas_price|query|integer|false|The gas price to pay.|
+|gas_limit|query|integer|false|The gas limit to use.|
+
+> Example responses
+
+```json
+{
+  "status_code": 200,
+  "message": "3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749"
+}
+```
+
+<h3 id="Sign and send transaction.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Send a transaction onto the network.|Inline|
+
+<h3 id="Sign and send transaction.-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» status_code|integer|false|No description|
+|» message|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="ONCHAIN.IO-API-overview-ERC20">ERC20</h1>
+
+## Create Unsigned Transaction
+
+<a id="opIdCreate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/erc20/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/erc20/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18 HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/erc20/create/',
+  method: 'post',
+  data: '?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/erc20/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/erc20/create/',
+  params: {
+  'to' => 'string',
+'from' => 'string',
+'amount' => 'integer',
+'contract_id' => 'string',
+'decimal_places' => 'integer'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/erc20/create/', params={
+  'to': '2.5329069089123447e+76',  'from': '2.5329069089123447e+76',  'amount': '80000',  'contract_id': '6.058968844090876e+47',  'decimal_places': '18'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/erc20/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/erc20/create/", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /erc20/create/`
+
+Create an unsigned transaction. OnChain returns the ethereum transaction in hex format along with a hash that would need to be signed.
+
+<h3 id="Create Unsigned Transaction-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|to|query|string|true|The address to send Ether to.|
+|from|query|string|true|The addresses we are sending ether from.|
+|amount|query|integer|true|The amount we wish to send in GWEI.|
+|contract_id|query|string|true|The contract ID of the ERC20 token.|
+|decimal_places|query|integer|true|The number of decimal places for this contract.|
+|gas_price|query|integer|false|The gas price to pay.|
+|gas_limit|query|integer|false|The gas limit to use.|
+
+> Example responses
+
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "hash_to_sign": "955f74e31610aa78bf15d79ec4df4c36dc98e802f52002"
+}
+```
+
+<h3 id="Create Unsigned Transaction-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Sign and send transaction.
+
+<a id="opIdSign and send"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/erc20/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/erc20/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52 HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/erc20/sign_and_send/',
+  method: 'post',
+  data: '?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/erc20/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/erc20/sign_and_send/',
+  params: {
+  'to' => 'string',
+'from' => 'string',
+'amount' => 'integer',
+'contract_id' => 'string',
+'decimal_places' => 'integer',
+'r' => 'string',
+'s' => 'string',
+'v' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/erc20/sign_and_send/', params={
+  'to': '2.5329069089123447e+76',  'from': '2.5329069089123447e+76',  'amount': '80000',  'contract_id': '6.058968844090876e+47',  'decimal_places': '18',  'r': '37ffbebc90cd580b516d99cc53050e93a6cd5f',  's': '37ffbebc90cd580b516d99cc53050e93a6cd5f',  'v': '52'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/erc20/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/erc20/sign_and_send/", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /erc20/sign_and_send/`
+
+Sign and send transaction onto the Ethereum network.
+
+<h3 id="Sign and send transaction.-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|to|query|string|true|The address to send Ether to.|
+|from|query|string|true|The addresses we are sending ether from.|
+|amount|query|integer|true|The amount we wish to send in GWEI.|
+|contract_id|query|string|true|The contract ID of the ERC20 token.|
+|decimal_places|query|integer|true|The number of decimal places for this contract.|
 |r|query|string|true|The signed r value.|
 |s|query|string|true|The signed r value.|
 |v|query|string|true|The signed r value.|
