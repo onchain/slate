@@ -30,6 +30,7 @@ components:
         - ethereum
         - bitcoin_private
         - bitcoin_gold
+        - bitcoin_cash
         - dash
         - zcash
         - zclassic
