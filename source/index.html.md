@@ -536,23 +536,12 @@ Returns the transaction history for an address or addresses.
   "total_txs": 37000,
   "txs": [
     {
-      "blockheight": 48138,
+      "confirmations": 3,
       "time": 1524579200,
-      "total_out": 1,
-      "total_in": 1,
-      "fees": 40000,
-      "vins": [
-        {
-          "amount": 395260,
-          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-        }
-      ],
-      "vouts": [
-        {
-          "amount": 395260,
-          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-        }
-      ]
+      "is_deposit": true,
+      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+      "amount": 27018060,
+      "human_amount": 0.2701806
     }
   ]
 }
@@ -2111,65 +2100,18 @@ This operation does not require authentication
 |totals|[balance](#schemabalance)|false|No description|
 |addresses|[[addr_balance](#schemaaddr_balance)]|false|No description|
 
-<h2 id="tocSvins">vins</h2>
-
-<a id="schemavins"></a>
-
-```json
-{
-  "amount": 395260,
-  "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|amount|integer|false|No description|
-|address|string|false|No description|
-
-<h2 id="tocSvouts">vouts</h2>
-
-<a id="schemavouts"></a>
-
-```json
-{
-  "amount": 395260,
-  "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|amount|integer|false|No description|
-|address|string|false|No description|
-
 <h2 id="tocStx">tx</h2>
 
 <a id="schematx"></a>
 
 ```json
 {
-  "blockheight": 48138,
+  "confirmations": 3,
   "time": 1524579200,
-  "total_out": 1,
-  "total_in": 1,
-  "fees": 40000,
-  "vins": [
-    {
-      "amount": 395260,
-      "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-    }
-  ],
-  "vouts": [
-    {
-      "amount": 395260,
-      "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-    }
-  ]
+  "is_deposit": true,
+  "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+  "amount": 27018060,
+  "human_amount": 0.2701806
 }
 ```
 
@@ -2177,13 +2119,12 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|blockheight|integer|false|No description|
+|confirmations|integer|false|No description|
 |time|integer|false|No description|
-|total_out|integer|false|No description|
-|total_in|integer|false|No description|
-|fees|integer|false|No description|
-|vins|[[vins](#schemavins)]|false|No description|
-|vouts|[[vouts](#schemavouts)]|false|No description|
+|is_deposit|boolean|false|No description|
+|address|string|false|No description|
+|amount|integer|false|No description|
+|human_amount|number|false|No description|
 
 <h2 id="tocSutxo">utxo</h2>
 
@@ -2216,23 +2157,12 @@ This operation does not require authentication
   "total_txs": 37000,
   "txs": [
     {
-      "blockheight": 48138,
+      "confirmations": 3,
       "time": 1524579200,
-      "total_out": 1,
-      "total_in": 1,
-      "fees": 40000,
-      "vins": [
-        {
-          "amount": 395260,
-          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-        }
-      ],
-      "vouts": [
-        {
-          "amount": 395260,
-          "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
-        }
-      ]
+      "is_deposit": true,
+      "address": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
+      "amount": 27018060,
+      "human_amount": 0.2701806
     }
   ]
 }

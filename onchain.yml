@@ -86,52 +86,26 @@ components:
             $ref: '#/components/schemas/addr_balance'
           type: array
           
-    vins:
-      type: object
-      properties:
-        amount:
-          type: integer
-          example: 395260
-        address:
-          type: string
-          example: 1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX
-          
-    vouts:
-      type: object
-      properties:
-        amount:
-          type: integer
-          example: 395260
-        address:
-          type: string
-          example: 1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX
-          
     tx:
       type: object
       properties:
-        blockheight:
+        confirmations:
           type: integer
-          example: 48138
+          example: 3
         time:
           type: integer
           example: 1524579200
-        total_out:
+        is_deposit:
+          type: boolean
+        address:
+          type: string
+          example: "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY"
+        amount:
           type: integer
-          example: 1
-        total_in:
-          type: integer
-          example: 1
-        fees:
-          type: integer
-          example: 40000
-        vins:
-          type: array
-          items:
-            $ref: '#/components/schemas/vins'
-        vouts:
-          type: array
-          items:
-            $ref: '#/components/schemas/vouts'
+          example: 27018060
+        human_amount:
+          type: number
+          example: 0.2701806
     
     utxo:
       type: object
