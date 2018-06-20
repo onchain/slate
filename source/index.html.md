@@ -925,21 +925,23 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0 \
+curl -X POST https://onchain.io/api/transaction/sign_and_send/{coin} \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0 HTTP/1.1
+POST https://onchain.io/api/transaction/sign_and_send/{coin} HTTP/1.1
 Host: onchain.io
-
+Content-Type: application/json
 Accept: application/json
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json'
 
 };
@@ -947,7 +949,7 @@ var headers = {
 $.ajax({
   url: 'https://onchain.io/api/transaction/sign_and_send/{coin}',
   method: 'post',
-  data: '?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -958,16 +960,25 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "tx": "string",
+  "signatures": {
+    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+    "input_index": 0
+  }
+}';
 const headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json'
 
 };
 
-fetch('https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0',
+fetch('https://onchain.io/api/transaction/sign_and_send/{coin}',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -983,17 +994,13 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json'
 }
 
 result = RestClient.post 'https://onchain.io/api/transaction/sign_and_send/{coin}',
   params: {
-  'tx' => 'string',
-'public_keys' => 'array[string]',
-'signatures' => 'array[string]',
-'hashes_to_sign' => 'array[string]',
-'input_indexes' => 'array[integer]'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1002,19 +1009,12 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
 r = requests.post('https://onchain.io/api/transaction/sign_and_send/{coin}', params={
-  'tx': 'string',  'public_keys': [
-  "string"
-],  'signatures': [
-  "string"
-],  'hashes_to_sign': [
-  "string"
-],  'input_indexes': [
-  0
-]
+
 }, headers = headers)
 
 print r.json()
@@ -1022,7 +1022,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/transaction/sign_and_send/{coin}?tx=string&public_keys=string&signatures=string&hashes_to_sign=string&input_indexes=0");
+URL obj = new URL("https://onchain.io/api/transaction/sign_and_send/{coin}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1049,6 +1049,7 @@ import (
 func main() {
 
     headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
         
     }
@@ -1068,16 +1069,32 @@ func main() {
 
 Sign and send transaction onto the network.
 
+> Body parameter
+
+```json
+{
+  "tx": "string",
+  "signatures": {
+    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+    "input_index": 0
+  }
+}
+```
+
 <h3 id="Sign and Send a Transaction-parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
-|tx|query|string|true|The raw unsigned transaction as a hex string|
-|public_keys|query|array[string]|true|The list of public keys we are signing for.|
-|signatures|query|array[string]|true|The signatures generated for each.|
-|hashes_to_sign|query|array[string]|true|The list of hashes returned by the create API with the corresponding signatures from your private keys.|
-|input_indexes|query|array[integer]|true|The list of input indexes corresponding to the hashes and signatures.|
+|body|body|[signatures](#schemasignatures)|true|No description|
+|» tx|body|string|false|No description|
+|» signatures|body|[signature](#schemasignature)|false|No description|
+|»» hash_to_sign|body|string|false|No description|
+|»» signature|body|string|false|No description|
+|»» public_key|body|string|false|No description|
+|»» input_index|body|integer|false|No description|
 
 > Example responses
 
@@ -2236,6 +2253,29 @@ This operation does not require authentication
 |input_index|integer|false|No description|
 |public_key|string|false|No description|
 |hash_to_sign|string|false|No description|
+
+<h2 id="tocSsignatures">signatures</h2>
+
+<a id="schemasignatures"></a>
+
+```json
+{
+  "tx": "string",
+  "signatures": {
+    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+    "input_index": 0
+  }
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|tx|string|false|No description|
+|signatures|[signature](#schemasignature)|false|No description|
 
 <h2 id="tocSsignature">signature</h2>
 
