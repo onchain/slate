@@ -2021,6 +2021,541 @@ Status Code **default**
 This operation does not require authentication
 </aside>
 
+<h1 id="ONCHAIN.IO-API-overview-Exchange">Exchange</h1>
+
+## Get rates.
+
+<a id="opIdGet Rates"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://onchain.io/api/exchange/get_rate/{base}/{quote} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://onchain.io/api/exchange/get_rate/{base}/{quote} HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/exchange/get_rate/{base}/{quote}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/exchange/get_rate/{base}/{quote}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://onchain.io/api/exchange/get_rate/{base}/{quote}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://onchain.io/api/exchange/get_rate/{base}/{quote}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/exchange/get_rate/{base}/{quote}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/get_rate/{base}/{quote}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /exchange/get_rate/{base}/{quote}`
+
+Get current exchange rate for a currency pair.
+
+<h3 id="Get rates.-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|base|path|string|true|No description|
+|quote|path|string|true|No description|
+
+> Example responses
+
+```json
+{
+  "rate": 1243.444
+}
+```
+
+<h3 id="Get rates.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Send a transaction onto the network.|Inline|
+
+<h3 id="Get rates.-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» rate|number|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Verify trade.
+
+<a id="opIdVerify Trade"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000 HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/exchange/verify_trade/',
+  method: 'get',
+  data: '?from=bitcoin&to=bitcoin_gold&amount=10000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://onchain.io/api/exchange/verify_trade/',
+  params: {
+  'from' => 'string',
+'to' => 'string',
+'amount' => 'integer'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://onchain.io/api/exchange/verify_trade/', params={
+  'from': 'bitcoin',  'to': 'bitcoin_gold',  'amount': '10000'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/verify_trade/", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /exchange/verify_trade/`
+
+Can we make the requested trade?
+
+<h3 id="Verify trade.-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|from|query|string|true|No description|
+|to|query|string|true|No description|
+|amount|query|integer|true|The amount to exchange.|
+
+> Example responses
+
+```json
+{
+  "is_valid": false,
+  "errors": [
+    "Send amout too low."
+  ]
+}
+```
+
+<h3 id="Verify trade.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|List of possible errors|Inline|
+
+<h3 id="Verify trade.-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» is_valid|boolean|false|No description|
+|» errors|[string]|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Create trade.
+
+<a id="opIdCreate Trade"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/exchange/create_trade/',
+  method: 'get',
+  data: '?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://onchain.io/api/exchange/create_trade/',
+  params: {
+  'from' => 'string',
+'to' => 'string',
+'amount' => 'integer',
+'identifier' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://onchain.io/api/exchange/create_trade/', params={
+  'from': 'bitcoin',  'to': 'bitcoin_gold',  'amount': '10000',  'identifier': 'asd324fdsg'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/create_trade/", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /exchange/create_trade/`
+
+Create the trade and get a deposit address.
+
+<h3 id="Create trade.-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|from|query|string|true|No description|
+|to|query|string|true|No description|
+|amount|query|integer|true|The amount to exchange.|
+|identifier|query|string|true|Connect the history together.|
+
+> Example responses
+
+```json
+{
+  "deposit_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "is_valid": false,
+  "errors": [
+    "Send amout too low."
+  ]
+}
+```
+
+<h3 id="Create trade.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|List of possible errors|Inline|
+
+<h3 id="Create trade.-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» deposit_address|string|false|No description|
+|» is_valid|boolean|false|No description|
+|» errors|[string]|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Schemas
 
 <h2 id="tocScoin">coin</h2>
