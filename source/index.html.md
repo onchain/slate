@@ -897,6 +897,7 @@ Create an unsigned transaction. OnChain returns the transaction for the specifie
 ```json
 {
   "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "total_input_value": 500000,
   "hashes": [
     {
       "input_index": 0,
@@ -2199,6 +2200,7 @@ This operation does not require authentication
 ```json
 {
   "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "total_input_value": 500000,
   "hashes": [
     {
       "input_index": 0,
@@ -2214,6 +2216,7 @@ This operation does not require authentication
 |Name|Type|Required|Description|
 |---|---|---|---|
 |tx|string|false|No description|
+|total_input_value|integer|false|No description|
 |hashes|[[hash_to_sign](#schemahash_to_sign)]|false|No description|
 
 <h2 id="tocSethereum_to_sign">ethereum_to_sign</h2>
