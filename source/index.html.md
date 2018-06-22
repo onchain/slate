@@ -2031,13 +2031,13 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X GET https://onchain.io/api/exchange/get_rate/{base}/{quote} \
+curl -X GET https://onchain.io/api/exchange/get_rates/{coins} \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://onchain.io/api/exchange/get_rate/{base}/{quote} HTTP/1.1
+GET https://onchain.io/api/exchange/get_rates/{coins} HTTP/1.1
 Host: onchain.io
 
 Accept: application/json
@@ -2051,7 +2051,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://onchain.io/api/exchange/get_rate/{base}/{quote}',
+  url: 'https://onchain.io/api/exchange/get_rates/{coins}',
   method: 'get',
 
   headers: headers,
@@ -2070,7 +2070,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/exchange/get_rate/{base}/{quote}',
+fetch('https://onchain.io/api/exchange/get_rates/{coins}',
 {
   method: 'GET',
 
@@ -2092,7 +2092,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://onchain.io/api/exchange/get_rate/{base}/{quote}',
+result = RestClient.get 'https://onchain.io/api/exchange/get_rates/{coins}',
   params: {
   }, headers: headers
 
@@ -2106,7 +2106,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://onchain.io/api/exchange/get_rate/{base}/{quote}', params={
+r = requests.get('https://onchain.io/api/exchange/get_rates/{coins}', params={
 
 }, headers = headers)
 
@@ -2115,7 +2115,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/exchange/get_rate/{base}/{quote}");
+URL obj = new URL("https://onchain.io/api/exchange/get_rates/{coins}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2147,7 +2147,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/get_rate/{base}/{quote}", data)
+    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/get_rates/{coins}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2157,22 +2157,22 @@ func main() {
 
 ```
 
-`GET /exchange/get_rate/{base}/{quote}`
+`GET /exchange/get_rates/{coins}`
 
-Get current exchange rate for a currency pair.
+Get current exchange rate for currencies.
 
 <h3 id="Get rates.-parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|base|path|string|true|No description|
-|quote|path|string|true|No description|
+|coins|path|string|true|Comma separated list of coins|
 
 > Example responses
 
 ```json
 {
-  "rate": 1243.444
+  "bitcoin": 0.99,
+  "bitcoin_cash": 0.1
 }
 ```
 
@@ -2188,7 +2188,7 @@ Status Code **default**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|» rate|number|false|No description|
+|» **additionalProperties**|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
@@ -2836,4 +2836,41 @@ This operation does not require authentication
 |signature|string|false|No description|
 |public_key|string|false|No description|
 |input_index|integer|false|No description|
+
+<h2 id="tocSrate">rate</h2>
+
+<a id="schemarate"></a>
+
+```json
+{
+  "coin": "zcash",
+  "rate": 0.004
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|coin|string|false|No description|
+|rate|number|false|No description|
+
+<h2 id="tocSrates">rates</h2>
+
+<a id="schemarates"></a>
+
+```json
+{
+  "rates": {
+    "coin": "zcash",
+    "rate": 0.004
+  }
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|rates|[rate](#schemarate)|false|No description|
 

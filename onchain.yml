@@ -195,6 +195,22 @@ components:
           type: integer
           example: 0
     
+    rate:
+      type: object
+      properties:
+        coin:
+          type: string
+          example: zcash
+        rate:
+          type: number
+          example: 0.004
+    
+    rates:
+      type: object
+      properties:
+        rates:
+          $ref: '#/components/schemas/rate'
+    
 paths:
   /address/balance/{coin}/{address}:
     get:
@@ -769,36 +785,33 @@ paths:
                     type: string
                     example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749
   
-  /exchange/get_rate/{base}/{quote}:
+  /exchange/get_rates/{coins}:
     get:
       tags:
         - Exchange
       parameters:
         - in: path
-          name: base   # Note the name is the same as in the path
+          name: coins   # Note the name is the same as in the path
           required: true
           schema:
-            $ref: '#/components/schemas/coin'
-          example: bitcoin
-        - in: path
-          name: quote   # Note the name is the same as in the path
-          required: true
-          schema:
-            $ref: '#/components/schemas/coin'
-          example: bitcoin_gold
+            type: string
+          description: Comma separated list of coins
+          example: bitcoin,zcash
       operationId: Get Rates
       summary: Get rates.
-      description: Get current exchange rate for a currency pair.
+      description: Get current exchange rate for currencies.
       responses:
         default:
           description: Send a transaction onto the network.
           content:
             application/json:
               schema:
-                properties:
-                  rate:
-                    type: number
-                    example: 1243.444
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  bitcoin: 0.99
+                  bitcoin_cash: 0.1
   
   /exchange/verify_trade/:
     get:
