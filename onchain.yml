@@ -517,7 +517,7 @@ paths:
   
 
                   
-  /multisig/create/{coin}:
+  /multi_sig/create/{coin}:
     post:
       tags:
         - Multisig
@@ -577,7 +577,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/hashes_to_sign"
                   
-  /multisig/sign_and_send/{coin}:
+  /multi_sig/sign_and_send/{coin}:
     post:
       tags:
         - Multisig

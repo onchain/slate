@@ -1309,13 +1309,13 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 \
+curl -X POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 HTTP/1.1
+POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 HTTP/1.1
 Host: onchain.io
 
 Accept: application/json
@@ -1329,7 +1329,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://onchain.io/api/multisig/create/{coin}',
+  url: 'https://onchain.io/api/multi_sig/create/{coin}',
   method: 'post',
   data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
   headers: headers,
@@ -1348,7 +1348,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
+fetch('https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
 {
   method: 'POST',
 
@@ -1370,7 +1370,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://onchain.io/api/multisig/create/{coin}',
+result = RestClient.post 'https://onchain.io/api/multi_sig/create/{coin}',
   params: {
   'to' => 'string',
 'from' => '[redeem_scripts](#schemaredeem_scripts)',
@@ -1387,7 +1387,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://onchain.io/api/multisig/create/{coin}', params={
+r = requests.post('https://onchain.io/api/multi_sig/create/{coin}', params={
   'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'from': {
   "n": 1,
   "public_keys": {
@@ -1401,7 +1401,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000");
+URL obj = new URL("https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1433,7 +1433,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://onchain.io/api/multisig/create/{coin}", data)
+    req, err := http.NewRequest("POST", "https://onchain.io/api/multi_sig/create/{coin}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1443,7 +1443,7 @@ func main() {
 
 ```
 
-`POST /multisig/create/{coin}`
+`POST /multi_sig/create/{coin}`
 
 Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed.
 
@@ -1493,14 +1493,14 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/multisig/sign_and_send/{coin} \
+curl -X POST https://onchain.io/api/multi_sig/sign_and_send/{coin} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/multisig/sign_and_send/{coin} HTTP/1.1
+POST https://onchain.io/api/multi_sig/sign_and_send/{coin} HTTP/1.1
 Host: onchain.io
 Content-Type: application/json
 Accept: application/json
@@ -1515,7 +1515,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://onchain.io/api/multisig/sign_and_send/{coin}',
+  url: 'https://onchain.io/api/multi_sig/sign_and_send/{coin}',
   method: 'post',
 
   headers: headers,
@@ -1543,7 +1543,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/multisig/sign_and_send/{coin}',
+fetch('https://onchain.io/api/multi_sig/sign_and_send/{coin}',
 {
   method: 'POST',
   body: inputBody,
@@ -1566,7 +1566,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://onchain.io/api/multisig/sign_and_send/{coin}',
+result = RestClient.post 'https://onchain.io/api/multi_sig/sign_and_send/{coin}',
   params: {
   }, headers: headers
 
@@ -1581,7 +1581,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://onchain.io/api/multisig/sign_and_send/{coin}', params={
+r = requests.post('https://onchain.io/api/multi_sig/sign_and_send/{coin}', params={
 
 }, headers = headers)
 
@@ -1590,7 +1590,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/multisig/sign_and_send/{coin}");
+URL obj = new URL("https://onchain.io/api/multi_sig/sign_and_send/{coin}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1623,7 +1623,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://onchain.io/api/multisig/sign_and_send/{coin}", data)
+    req, err := http.NewRequest("POST", "https://onchain.io/api/multi_sig/sign_and_send/{coin}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1633,7 +1633,7 @@ func main() {
 
 ```
 
-`POST /multisig/sign_and_send/{coin}`
+`POST /multi_sig/sign_and_send/{coin}`
 
 Sign and send transaction onto the network.
 
