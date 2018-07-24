@@ -1309,21 +1309,23 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 \
+curl -X POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 HTTP/1.1
+POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 HTTP/1.1
 Host: onchain.io
-
+Content-Type: application/json
 Accept: application/json
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json'
 
 };
@@ -1331,7 +1333,7 @@ var headers = {
 $.ajax({
   url: 'https://onchain.io/api/multi_sig/create/{coin}',
   method: 'post',
-  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
+  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -1342,16 +1344,22 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "n": 1,
+  "public_keys": {
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
+  }
+}';
 const headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json'
 
 };
 
-fetch('https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
+fetch('https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -1367,13 +1375,13 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json'
 }
 
 result = RestClient.post 'https://onchain.io/api/multi_sig/create/{coin}',
   params: {
   'to' => 'string',
-'from' => '[redeem_scripts](#schemaredeem_scripts)',
 'amount' => 'integer'
 }, headers: headers
 
@@ -1384,16 +1392,12 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
 r = requests.post('https://onchain.io/api/multi_sig/create/{coin}', params={
-  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'from': {
-  "n": 1,
-  "public_keys": {
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
-  }
-},  'amount': '80000'
+  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'amount': '80000'
 }, headers = headers)
 
 print r.json()
@@ -1401,7 +1405,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000");
+URL obj = new URL("https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1428,6 +1432,7 @@ import (
 func main() {
 
     headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
         
     }
@@ -1447,17 +1452,31 @@ func main() {
 
 Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed.
 
+> Body parameter
+
+```json
+{
+  "n": 1,
+  "public_keys": {
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
+  }
+}
+```
+
 <h3 id="Create Unsigned Transaction-parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |to|query|string|true|The address to send coins to.|
-|from|query|[redeem_scripts](#schemaredeem_scripts)|true|No description|
 |amount|query|integer|true|The amount we wish to send.|
 |fee_address|query|string|false|An address to send fees to.|
 |fee_amount|query|string|false|The amount of fees to send.|
 |miners_fee|query|integer|false|The amount to send to the miners.|
+|body|body|[redeem_scripts](#schemaredeem_scripts)|true|No description|
+|» n|body|integer|false|No description|
+|» public_keys|body|[redeem_script](#schemaredeem_script)|false|No description|
+|»» public_key|body|string|false|No description|
 
 > Example responses
 

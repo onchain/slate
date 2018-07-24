@@ -537,11 +537,6 @@ paths:
           description: The address to send coins to.
           example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
         - in: query
-          name: from   
-          required: true
-          schema:
-            $ref: '#/components/schemas/redeem_scripts'
-        - in: query
           name: amount   
           required: true
           schema:
@@ -566,6 +561,12 @@ paths:
             type: integer
           description: The amount to send to the miners.
           example: 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/redeem_scripts'
       operationId: Create
       summary: Create Unsigned Transaction
       description: Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed. 
