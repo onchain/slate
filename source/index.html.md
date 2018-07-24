@@ -1299,6 +1299,399 @@ Status Code **default**
 This operation does not require authentication
 </aside>
 
+<h1 id="ONCHAIN.IO-API-overview-Multisig">Multisig</h1>
+
+## Create Unsigned Transaction
+
+<a id="opIdCreate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000 HTTP/1.1
+Host: onchain.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/multisig/create/{coin}',
+  method: 'post',
+  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/multisig/create/{coin}',
+  params: {
+  'to' => 'string',
+'from' => '[redeem_scripts](#schemaredeem_scripts)',
+'amount' => 'integer'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/multisig/create/{coin}', params={
+  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'from': {
+  "n": 1,
+  "public_keys": {
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
+  }
+},  'amount': '80000'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/multisig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=n,1,public_keys,%5Bobject%20Object%5D&amount=80000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/multisig/create/{coin}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /multisig/create/{coin}`
+
+Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed.
+
+<h3 id="Create Unsigned Transaction-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
+|to|query|string|true|The address to send coins to.|
+|from|query|[redeem_scripts](#schemaredeem_scripts)|true|No description|
+|amount|query|integer|true|The amount we wish to send.|
+|fee_address|query|string|false|An address to send fees to.|
+|fee_amount|query|string|false|The amount of fees to send.|
+|miners_fee|query|integer|false|The amount to send to the miners.|
+
+> Example responses
+
+```json
+{
+  "tx": "02000000011cd5d7621e2a7c9403e54e089cb0b5430b83ed13f1b897d3e319b100ba1b059b01000000db00483045022100d7534c80bc0a42addc3d955f74e31610aa78bf15d79ec4df4c36dc98e802f5200220369cab1bccb2dbca0921444ce3fafb15129fa0494d041998be104df39b8895ec01483045022100fe48c4c1d46e163acaff6b0d2e702812d20",
+  "total_input_value": 500000,
+  "hashes": [
+    {
+      "input_index": 0,
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+      "hash_to_sign": "004cfaf7cff86e7f171db23d67acd6c986273e578d7466e43e2b78913e1ce7c7"
+    }
+  ]
+}
+```
+
+<h3 id="Create Unsigned Transaction-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and a list of hashes that need signatures.|[hashes_to_sign](#schemahashes_to_sign)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Sign and Send a Transaction
+
+<a id="opIdSign and send"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://onchain.io/api/multisig/sign_and_send/{coin} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://onchain.io/api/multisig/sign_and_send/{coin} HTTP/1.1
+Host: onchain.io
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://onchain.io/api/multisig/sign_and_send/{coin}',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "tx": "string",
+  "signatures": {
+    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+    "input_index": 0
+  }
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+fetch('https://onchain.io/api/multisig/sign_and_send/{coin}',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://onchain.io/api/multisig/sign_and_send/{coin}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://onchain.io/api/multisig/sign_and_send/{coin}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://onchain.io/api/multisig/sign_and_send/{coin}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://onchain.io/api/multisig/sign_and_send/{coin}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /multisig/sign_and_send/{coin}`
+
+Sign and send transaction onto the network.
+
+> Body parameter
+
+```json
+{
+  "tx": "string",
+  "signatures": {
+    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+    "input_index": 0
+  }
+}
+```
+
+<h3 id="Sign and Send a Transaction-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|coin|path|string|true|The name of the coin i.e. bitcoin|
+|body|body|[signatures](#schemasignatures)|true|No description|
+|» tx|body|string|false|No description|
+|» signatures|body|[signature](#schemasignature)|false|No description|
+|»» hash_to_sign|body|string|false|No description|
+|»» signature|body|string|false|No description|
+|»» public_key|body|string|false|No description|
+|»» input_index|body|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "status_code": 200,
+  "message": "3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749"
+}
+```
+
+<h3 id="Sign and Send a Transaction-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Send a transaction onto the network.|Inline|
+
+<h3 id="Sign and Send a Transaction-responseschema">Response Schema</h3>
+
+Status Code **default**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» status_code|integer|false|No description|
+|» message|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="ONCHAIN.IO-API-overview-Ethereum-API">Ethereum API</h1>
 
 ## Create Unsigned Transaction
@@ -2836,6 +3229,42 @@ This operation does not require authentication
 |signature|string|false|No description|
 |public_key|string|false|No description|
 |input_index|integer|false|No description|
+
+<h2 id="tocSredeem_script">redeem_script</h2>
+
+<a id="schemaredeem_script"></a>
+
+```json
+{
+  "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|public_key|string|false|No description|
+
+<h2 id="tocSredeem_scripts">redeem_scripts</h2>
+
+<a id="schemaredeem_scripts"></a>
+
+```json
+{
+  "n": 1,
+  "public_keys": {
+    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
+  }
+}
+```
+
+### Properties
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|n|integer|false|No description|
+|public_keys|[redeem_script](#schemaredeem_script)|false|No description|
 
 <h2 id="tocSrate">rate</h2>
 

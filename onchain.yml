@@ -194,6 +194,22 @@ components:
         input_index:
           type: integer
           example: 0
+          
+    redeem_script:
+      type: object
+      properties:
+        public_key:
+          type: string
+          example: 036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49
+    
+    redeem_scripts:
+      type: object
+      properties:
+        n:
+          type: integer
+          example: 1
+        public_keys:
+          $ref: '#/components/schemas/redeem_script'
     
     rate:
       type: object
@@ -499,7 +515,103 @@ paths:
                     type: string
                     example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749
   
+
                   
+  /multisig/create/{coin}:
+    post:
+      tags:
+        - Multisig
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          example: testnet3
+          schema:
+            $ref: '#/components/schemas/coin'
+          description: The name of the coin i.e. bitcoin
+        - in: query
+          name: to   
+          required: true
+          schema:
+            type: string
+          description: The address to send coins to.
+          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
+        - in: query
+          name: from   
+          required: true
+          schema:
+            $ref: '#/components/schemas/redeem_scripts'
+        - in: query
+          name: amount   
+          required: true
+          schema:
+            type: integer
+          description: The amount we wish to send.
+          example: 80000
+        - in: query
+          name: fee_address   
+          schema:
+            type: string
+          description: An address to send fees to.
+          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
+        - in: query
+          name: fee_amount   
+          schema:
+            type: string
+          description: The amount of fees to send.
+          example: 10000
+        - in: query
+          name: miners_fee   
+          schema:
+            type: integer
+          description: The amount to send to the miners.
+          example: 10000
+      operationId: Create
+      summary: Create Unsigned Transaction
+      description: Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed. 
+      responses:
+        '200':
+          description: The unsigned transaction in hex format and a list of hashes that need signatures.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/hashes_to_sign"
+                  
+  /multisig/sign_and_send/{coin}:
+    post:
+      tags:
+        - Multisig
+      parameters:
+        - in: path
+          name: coin   # Note the name is the same as in the path
+          required: true
+          example: testnet3
+          schema:
+            $ref: '#/components/schemas/coin'
+          description: The name of the coin i.e. bitcoin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/signatures"
+                
+      operationId: Sign and send
+      summary: Sign and Send a Transaction
+      description: Sign and send transaction onto the network.
+      responses:
+        default:
+          description: Send a transaction onto the network.
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749                  
   /ethereum/create/:
     post:
       tags:
