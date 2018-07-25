@@ -202,13 +202,28 @@ components:
           type: string
           example: 036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49
     
-    redeem_scripts:
+    multi_sig_payment:
       type: object
       properties:
-        n:
+        number_of_required_signatures:
           type: integer
           example: 1
-        public_keys:
+        amount:
+          type: integer
+          example: 100000
+        to:
+          type: string
+          example: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX'
+        fee_amount:
+          type: integer
+          example: 100000
+        fee_address:
+          type: string
+          example: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX'
+        miners_fee:
+          type: integer
+          example: 40000
+        redeem_scripts:
           $ref: '#/components/schemas/redeem_script'
     
     rate:
@@ -528,45 +543,12 @@ paths:
           example: testnet3
           schema:
             $ref: '#/components/schemas/coin'
-          description: The name of the coin i.e. bitcoin
-        - in: query
-          name: to   
-          required: true
-          schema:
-            type: string
-          description: The address to send coins to.
-          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
-        - in: query
-          name: amount   
-          required: true
-          schema:
-            type: integer
-          description: The amount we wish to send.
-          example: 80000
-        - in: query
-          name: fee_address   
-          schema:
-            type: string
-          description: An address to send fees to.
-          example: 2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5
-        - in: query
-          name: fee_amount   
-          schema:
-            type: string
-          description: The amount of fees to send.
-          example: 10000
-        - in: query
-          name: miners_fee   
-          schema:
-            type: integer
-          description: The amount to send to the miners.
-          example: 10000
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/redeem_scripts'
+              $ref: '#/components/schemas/multi_sig_payment'
       operationId: Create
       summary: Create Unsigned Transaction
       description: Create an unsigned transaction. OnChain returns the transaction for the specified coin in hex format along with a list of hashes that need to be signed. 

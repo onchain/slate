@@ -1309,14 +1309,14 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 \
+curl -X POST https://onchain.io/api/multi_sig/create/{coin} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000 HTTP/1.1
+POST https://onchain.io/api/multi_sig/create/{coin} HTTP/1.1
 Host: onchain.io
 Content-Type: application/json
 Accept: application/json
@@ -1333,7 +1333,7 @@ var headers = {
 $.ajax({
   url: 'https://onchain.io/api/multi_sig/create/{coin}',
   method: 'post',
-  data: '?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -1345,8 +1345,13 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "n": 1,
-  "public_keys": {
+  "number_of_required_signatures": 1,
+  "amount": 100000,
+  "to": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "fee_amount": 100000,
+  "fee_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "miners_fee": 40000,
+  "redeem_scripts": {
     "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
   }
 }';
@@ -1356,7 +1361,7 @@ const headers = {
 
 };
 
-fetch('https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000',
+fetch('https://onchain.io/api/multi_sig/create/{coin}',
 {
   method: 'POST',
   body: inputBody,
@@ -1381,9 +1386,7 @@ headers = {
 
 result = RestClient.post 'https://onchain.io/api/multi_sig/create/{coin}',
   params: {
-  'to' => 'string',
-'amount' => 'integer'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1397,7 +1400,7 @@ headers = {
 }
 
 r = requests.post('https://onchain.io/api/multi_sig/create/{coin}', params={
-  'to': '2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5',  'amount': '80000'
+
 }, headers = headers)
 
 print r.json()
@@ -1405,7 +1408,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://onchain.io/api/multi_sig/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&amount=80000");
+URL obj = new URL("https://onchain.io/api/multi_sig/create/{coin}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1456,8 +1459,13 @@ Create an unsigned transaction. OnChain returns the transaction for the specifie
 
 ```json
 {
-  "n": 1,
-  "public_keys": {
+  "number_of_required_signatures": 1,
+  "amount": 100000,
+  "to": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "fee_amount": 100000,
+  "fee_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "miners_fee": 40000,
+  "redeem_scripts": {
     "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
   }
 }
@@ -1467,15 +1475,15 @@ Create an unsigned transaction. OnChain returns the transaction for the specifie
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|coin|path|string|true|The name of the coin i.e. bitcoin|
-|to|query|string|true|The address to send coins to.|
-|amount|query|integer|true|The amount we wish to send.|
-|fee_address|query|string|false|An address to send fees to.|
-|fee_amount|query|string|false|The amount of fees to send.|
-|miners_fee|query|integer|false|The amount to send to the miners.|
-|body|body|[redeem_scripts](#schemaredeem_scripts)|true|No description|
-|» n|body|integer|false|No description|
-|» public_keys|body|[redeem_script](#schemaredeem_script)|false|No description|
+|coin|path|string|true|No description|
+|body|body|[multi_sig_payment](#schemamulti_sig_payment)|true|No description|
+|» number_of_required_signatures|body|integer|false|No description|
+|» amount|body|integer|false|No description|
+|» to|body|string|false|No description|
+|» fee_amount|body|integer|false|No description|
+|» fee_address|body|string|false|No description|
+|» miners_fee|body|integer|false|No description|
+|» redeem_scripts|body|[redeem_script](#schemaredeem_script)|false|No description|
 |»» public_key|body|string|false|No description|
 
 > Example responses
@@ -3265,14 +3273,19 @@ This operation does not require authentication
 |---|---|---|---|
 |public_key|string|false|No description|
 
-<h2 id="tocSredeem_scripts">redeem_scripts</h2>
+<h2 id="tocSmulti_sig_payment">multi_sig_payment</h2>
 
-<a id="schemaredeem_scripts"></a>
+<a id="schemamulti_sig_payment"></a>
 
 ```json
 {
-  "n": 1,
-  "public_keys": {
+  "number_of_required_signatures": 1,
+  "amount": 100000,
+  "to": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "fee_amount": 100000,
+  "fee_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+  "miners_fee": 40000,
+  "redeem_scripts": {
     "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49"
   }
 }
@@ -3282,8 +3295,13 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|n|integer|false|No description|
-|public_keys|[redeem_script](#schemaredeem_script)|false|No description|
+|number_of_required_signatures|integer|false|No description|
+|amount|integer|false|No description|
+|to|string|false|No description|
+|fee_amount|integer|false|No description|
+|fee_address|string|false|No description|
+|miners_fee|integer|false|No description|
+|redeem_scripts|[redeem_script](#schemaredeem_script)|false|No description|
 
 <h2 id="tocSrate">rate</h2>
 
