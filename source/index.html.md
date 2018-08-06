@@ -41,7 +41,8 @@ Base URLs:
 ```shell
 # You can also use wget
 curl -X GET https://onchain.io/api/address/balance/{coin}/{address} \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -55,7 +56,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -75,7 +77,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -98,7 +101,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.get 'https://onchain.io/api/address/balance/{coin}/{address}',
@@ -112,7 +116,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.get('https://onchain.io/api/address/balance/{coin}/{address}', params={
@@ -152,6 +157,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -195,10 +201,11 @@ Returns the satoshi balance, usd balance and user viewable balance for an addres
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the balances|[balance](#schemabalance)|
+|default|Default|Returns the balances|[balance](#schemabalance)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Get Balances
@@ -210,7 +217,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET https://onchain.io/api/address/balances/{coin}/{addresses} \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -224,7 +232,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -244,7 +253,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -267,7 +277,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.get 'https://onchain.io/api/address/balances/{coin}/{addresses}',
@@ -281,7 +292,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.get('https://onchain.io/api/address/balances/{coin}/{addresses}', params={
@@ -321,6 +333,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -376,10 +389,11 @@ Returns the satoshi balance, usd balance and user viewable balance for a set of 
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the balances|[balances](#schemabalances)|
+|default|Default|Returns the balances|[balances](#schemabalances)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Get History
@@ -391,7 +405,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET https://onchain.io/api/address/history/{coin}/{addresses} \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -405,7 +420,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -425,7 +441,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -448,7 +465,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.get 'https://onchain.io/api/address/history/{coin}/{addresses}',
@@ -462,7 +480,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.get('https://onchain.io/api/address/history/{coin}/{addresses}', params={
@@ -502,6 +521,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -551,10 +571,11 @@ Returns the transaction history for an address or addresses.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the transaction history for an address or addresses|[history](#schemahistory)|
+|default|Default|Returns the transaction history for an address or addresses|[history](#schemahistory)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Get Unspent Outs
@@ -566,7 +587,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET https://onchain.io/api/address/utxo/{coin}/{addresses} \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -580,7 +602,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -600,7 +623,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -623,7 +647,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.get 'https://onchain.io/api/address/utxo/{coin}/{addresses}',
@@ -637,7 +662,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.get('https://onchain.io/api/address/utxo/{coin}/{addresses}', params={
@@ -677,6 +703,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -719,11 +746,11 @@ Returns the unspent outputs for an address or addresses.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Returns the unspent outputs for an address or addresses|Inline|
+|default|Default|Returns the unspent outputs for an address or addresses|Inline|
 
 <h3 id="Get Unspent Outs-responseschema">Response Schema</h3>
 
-Status Code **200**
+Status Code **default**
 
 |Name|Type|Required|Description|
 |---|---|---|---|
@@ -733,8 +760,9 @@ Status Code **200**
 |» txid|string|false|No description|
 |» script_pub_key|string|false|No description|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 <h1 id="ONCHAIN.IO-API-overview-Transaction-API">Transaction API</h1>
@@ -748,7 +776,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST https://onchain.io/api/transaction/create/{coin}?to=2MttUxQo4jjyVtb5Br49WUEy3LZoZuwtba5&from=036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49&amount=80000 \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -762,7 +791,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -782,7 +812,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -805,7 +836,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/transaction/create/{coin}',
@@ -822,7 +854,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/transaction/create/{coin}', params={
@@ -862,6 +895,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -889,7 +923,7 @@ Create an unsigned transaction. OnChain returns the transaction for the specifie
 |from|query|string|true|The addresses we are sending coins from. OnChain will fetch unspent outs from each address in order until the amount to send is met. We use the public hex key of the address not the hash.|
 |amount|query|integer|true|The amount we wish to send.|
 |fee_address|query|string|false|An address to send fees to.|
-|fee_amount|query|string|false|The amount of fees to send.|
+|fee_amount|query|integer|false|The amount of fees to send.|
 |miners_fee|query|integer|false|The amount to send to the miners.|
 
 > Example responses
@@ -912,10 +946,11 @@ Create an unsigned transaction. OnChain returns the transaction for the specifie
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and a list of hashes that need signatures.|[hashes_to_sign](#schemahashes_to_sign)|
+|default|Default|The unsigned transaction in hex format and a list of hashes that need signatures.|[hashes_to_sign](#schemahashes_to_sign)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Sign and Send a Transaction
@@ -928,7 +963,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X POST https://onchain.io/api/transaction/sign_and_send/{coin} \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -943,7 +979,8 @@ Accept: application/json
 ```javascript
 var headers = {
   'Content-Type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -963,16 +1000,19 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "tx": "string",
-  "signatures": {
-    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
-    "input_index": 0
-  }
+  "signatures": [
+    {
+      "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+      "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+      "input_index": 0
+    }
+  ]
 }';
 const headers = {
   'Content-Type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -996,7 +1036,8 @@ require 'json'
 
 headers = {
   'Content-Type' => 'application/json',
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/transaction/sign_and_send/{coin}',
@@ -1011,7 +1052,8 @@ p JSON.parse(result)
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/transaction/sign_and_send/{coin}', params={
@@ -1052,6 +1094,7 @@ func main() {
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -1075,12 +1118,14 @@ Sign and send transaction onto the network.
 ```json
 {
   "tx": "string",
-  "signatures": {
-    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
-    "input_index": 0
-  }
+  "signatures": [
+    {
+      "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+      "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+      "input_index": 0
+    }
+  ]
 }
 ```
 
@@ -1091,7 +1136,7 @@ Sign and send transaction onto the network.
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |body|body|[signatures](#schemasignatures)|true|No description|
 |» tx|body|string|false|No description|
-|» signatures|body|[signature](#schemasignature)|false|No description|
+|» signatures|body|[[signature](#schemasignature)]|false|No description|
 |»» hash_to_sign|body|string|false|No description|
 |»» signature|body|string|false|No description|
 |»» public_key|body|string|false|No description|
@@ -1110,19 +1155,11 @@ Sign and send transaction onto the network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Send a transaction onto the network.|Inline|
+|default|Default|Send a transaction onto the network.|[send_status](#schemasend_status)|
 
-<h3 id="Sign and Send a Transaction-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» status_code|integer|false|No description|
-|» message|string|false|No description|
-
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Send Raw Transaction
@@ -1134,7 +1171,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST https://onchain.io/api/transaction/send_raw/{coin}?rawtx=string \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -1148,7 +1186,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1168,7 +1207,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1191,7 +1231,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/transaction/send_raw/{coin}',
@@ -1206,7 +1247,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/transaction/send_raw/{coin}', params={
@@ -1246,6 +1288,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -1284,19 +1327,11 @@ Send a transaction onto the network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Send a transaction onto the network.|Inline|
+|default|Default|Send a transaction onto the network.|[send_status](#schemasend_status)|
 
-<h3 id="Send Raw Transaction-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» status_code|integer|false|No description|
-|» message|string|false|No description|
-
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 <h1 id="ONCHAIN.IO-API-overview-Multisig">Multisig</h1>
@@ -1311,7 +1346,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X POST https://onchain.io/api/multi_sig/create/{coin} \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -1326,7 +1362,8 @@ Accept: application/json
 ```javascript
 var headers = {
   'Content-Type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1357,7 +1394,8 @@ const inputBody = '{
 }';
 const headers = {
   'Content-Type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1381,7 +1419,8 @@ require 'json'
 
 headers = {
   'Content-Type' => 'application/json',
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/multi_sig/create/{coin}',
@@ -1396,7 +1435,8 @@ p JSON.parse(result)
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/multi_sig/create/{coin}', params={
@@ -1437,6 +1477,7 @@ func main() {
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -1506,10 +1547,11 @@ Create an unsigned transaction. OnChain returns the transaction for the specifie
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and a list of hashes that need signatures.|[hashes_to_sign](#schemahashes_to_sign)|
+|default|Default|The unsigned transaction in hex format and a list of hashes that need signatures.|[hashes_to_sign](#schemahashes_to_sign)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Sign and Send a Transaction
@@ -1522,7 +1564,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X POST https://onchain.io/api/multi_sig/sign_and_send/{coin} \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -1537,7 +1580,8 @@ Accept: application/json
 ```javascript
 var headers = {
   'Content-Type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1557,16 +1601,19 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "tx": "string",
-  "signatures": {
-    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
-    "input_index": 0
-  }
+  "signatures": [
+    {
+      "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+      "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+      "input_index": 0
+    }
+  ]
 }';
 const headers = {
   'Content-Type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1590,7 +1637,8 @@ require 'json'
 
 headers = {
   'Content-Type' => 'application/json',
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/multi_sig/sign_and_send/{coin}',
@@ -1605,7 +1653,8 @@ p JSON.parse(result)
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/multi_sig/sign_and_send/{coin}', params={
@@ -1646,6 +1695,7 @@ func main() {
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -1669,12 +1719,14 @@ Sign and send transaction onto the network.
 ```json
 {
   "tx": "string",
-  "signatures": {
-    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
-    "input_index": 0
-  }
+  "signatures": [
+    {
+      "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+      "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+      "input_index": 0
+    }
+  ]
 }
 ```
 
@@ -1685,7 +1737,7 @@ Sign and send transaction onto the network.
 |coin|path|string|true|The name of the coin i.e. bitcoin|
 |body|body|[signatures](#schemasignatures)|true|No description|
 |» tx|body|string|false|No description|
-|» signatures|body|[signature](#schemasignature)|false|No description|
+|» signatures|body|[[signature](#schemasignature)]|false|No description|
 |»» hash_to_sign|body|string|false|No description|
 |»» signature|body|string|false|No description|
 |»» public_key|body|string|false|No description|
@@ -1704,19 +1756,11 @@ Sign and send transaction onto the network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Send a transaction onto the network.|Inline|
+|default|Default|Send a transaction onto the network.|[send_status](#schemasend_status)|
 
-<h3 id="Sign and Send a Transaction-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» status_code|integer|false|No description|
-|» message|string|false|No description|
-
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 <h1 id="ONCHAIN.IO-API-overview-Ethereum-API">Ethereum API</h1>
@@ -1730,7 +1774,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST https://onchain.io/api/ethereum/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000 \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -1744,7 +1789,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1764,7 +1810,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1787,7 +1834,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/ethereum/create/',
@@ -1804,7 +1852,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/ethereum/create/', params={
@@ -1844,6 +1893,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -1885,10 +1935,11 @@ Create an unsigned transaction. OnChain returns the ethereum transaction in hex 
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
+|default|Default|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Sign and send transaction.
@@ -1900,7 +1951,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST https://onchain.io/api/ethereum/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52 \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -1914,7 +1966,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1934,7 +1987,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -1957,7 +2011,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/ethereum/sign_and_send/',
@@ -1977,7 +2032,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/ethereum/sign_and_send/', params={
@@ -2017,6 +2073,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -2061,19 +2118,11 @@ Sign and send transaction onto the Ethereum network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Send a transaction onto the network.|Inline|
+|default|Default|Send a transaction onto the network.|[send_status](#schemasend_status)|
 
-<h3 id="Sign and send transaction.-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» status_code|integer|false|No description|
-|» message|string|false|No description|
-
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 <h1 id="ONCHAIN.IO-API-overview-ERC20">ERC20</h1>
@@ -2087,7 +2136,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST https://onchain.io/api/erc20/create/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18 \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -2101,7 +2151,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -2121,7 +2172,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -2144,7 +2196,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/erc20/create/',
@@ -2163,7 +2216,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/erc20/create/', params={
@@ -2203,6 +2257,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -2246,10 +2301,11 @@ Create an unsigned transaction. OnChain returns the ethereum transaction in hex 
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
+|default|Default|The unsigned transaction in hex format and the hash to sign.|[ethereum_to_sign](#schemaethereum_to_sign)|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 ## Sign and send transaction.
@@ -2261,7 +2317,8 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST https://onchain.io/api/erc20/sign_and_send/?to=2.5329069089123447e%2B76&from=2.5329069089123447e%2B76&amount=80000&contract_id=6.058968844090876e%2B47&decimal_places=18&r=37ffbebc90cd580b516d99cc53050e93a6cd5f&s=37ffbebc90cd580b516d99cc53050e93a6cd5f&v=52 \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY'
 
 ```
 
@@ -2275,7 +2332,8 @@ Accept: application/json
 
 ```javascript
 var headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -2295,7 +2353,8 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'X-API-KEY':'API_KEY'
 
 };
 
@@ -2318,7 +2377,8 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json'
+  'Accept' => 'application/json',
+  'X-API-KEY' => 'API_KEY'
 }
 
 result = RestClient.post 'https://onchain.io/api/erc20/sign_and_send/',
@@ -2340,7 +2400,8 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'X-API-KEY': 'API_KEY'
 }
 
 r = requests.post('https://onchain.io/api/erc20/sign_and_send/', params={
@@ -2380,6 +2441,7 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
+        "X-API-KEY": []string{"API_KEY"},
         
     }
 
@@ -2426,554 +2488,11 @@ Sign and send transaction onto the Ethereum network.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Send a transaction onto the network.|Inline|
-
-<h3 id="Sign and send transaction.-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» status_code|integer|false|No description|
-|» message|string|false|No description|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="ONCHAIN.IO-API-overview-Exchange">Exchange</h1>
-
-## Get rates.
-
-<a id="opIdGet Rates"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://onchain.io/api/exchange/get_rates/{coins} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://onchain.io/api/exchange/get_rates/{coins} HTTP/1.1
-Host: onchain.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://onchain.io/api/exchange/get_rates/{coins}',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://onchain.io/api/exchange/get_rates/{coins}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://onchain.io/api/exchange/get_rates/{coins}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://onchain.io/api/exchange/get_rates/{coins}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://onchain.io/api/exchange/get_rates/{coins}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/get_rates/{coins}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /exchange/get_rates/{coins}`
-
-Get current exchange rate for currencies.
-
-<h3 id="Get rates.-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|coins|path|string|true|Comma separated list of coins|
-
-> Example responses
-
-```json
-{
-  "bitcoin": 0.99,
-  "bitcoin_cash": 0.1
-}
-```
-
-<h3 id="Get rates.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|Send a transaction onto the network.|Inline|
-
-<h3 id="Get rates.-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» **additionalProperties**|string|false|No description|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Verify trade.
-
-<a id="opIdVerify Trade"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000 \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000 HTTP/1.1
-Host: onchain.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://onchain.io/api/exchange/verify_trade/',
-  method: 'get',
-  data: '?from=bitcoin&to=bitcoin_gold&amount=10000',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://onchain.io/api/exchange/verify_trade/',
-  params: {
-  'from' => 'string',
-'to' => 'string',
-'amount' => 'integer'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://onchain.io/api/exchange/verify_trade/', params={
-  'from': 'bitcoin',  'to': 'bitcoin_gold',  'amount': '10000'
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://onchain.io/api/exchange/verify_trade/?from=bitcoin&to=bitcoin_gold&amount=10000");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/verify_trade/", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /exchange/verify_trade/`
-
-Can we make the requested trade?
-
-<h3 id="Verify trade.-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|from|query|string|true|No description|
-|to|query|string|true|No description|
-|amount|query|integer|true|The amount to exchange.|
-
-> Example responses
-
-```json
-{
-  "is_valid": false,
-  "errors": [
-    "Send amout too low."
-  ]
-}
-```
-
-<h3 id="Verify trade.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|List of possible errors|Inline|
-
-<h3 id="Verify trade.-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» is_valid|boolean|false|No description|
-|» errors|[string]|false|No description|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Create trade.
-
-<a id="opIdCreate Trade"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg HTTP/1.1
-Host: onchain.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://onchain.io/api/exchange/create_trade/',
-  method: 'get',
-  data: '?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://onchain.io/api/exchange/create_trade/',
-  params: {
-  'from' => 'string',
-'to' => 'string',
-'amount' => 'integer',
-'identifier' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://onchain.io/api/exchange/create_trade/', params={
-  'from': 'bitcoin',  'to': 'bitcoin_gold',  'amount': '10000',  'identifier': 'asd324fdsg'
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://onchain.io/api/exchange/create_trade/?from=bitcoin&to=bitcoin_gold&amount=10000&identifier=asd324fdsg");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://onchain.io/api/exchange/create_trade/", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /exchange/create_trade/`
-
-Create the trade and get a deposit address.
-
-<h3 id="Create trade.-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|from|query|string|true|No description|
-|to|query|string|true|No description|
-|amount|query|integer|true|The amount to exchange.|
-|identifier|query|string|true|Connect the history together.|
-
-> Example responses
-
-```json
-{
-  "deposit_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
-  "is_valid": false,
-  "errors": [
-    "Send amout too low."
-  ]
-}
-```
-
-<h3 id="Create trade.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|List of possible errors|Inline|
-
-<h3 id="Create trade.-responseschema">Response Schema</h3>
-
-Status Code **default**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» deposit_address|string|false|No description|
-|» is_valid|boolean|false|No description|
-|» errors|[string]|false|No description|
-
-<aside class="success">
-This operation does not require authentication
+|default|Default|Send a transaction onto the network.|[send_status](#schemasend_status)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+ApiKeyAuth
 </aside>
 
 # Schemas
@@ -3219,12 +2738,14 @@ This operation does not require authentication
 ```json
 {
   "tx": "string",
-  "signatures": {
-    "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
-    "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
-    "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
-    "input_index": 0
-  }
+  "signatures": [
+    {
+      "hash_to_sign": "7a77eb8e0e9e56ca925473cbfaa215822b1bc73de40dc9098d66b2eb785af9db",
+      "signature": "304402202915d9763c944918712155522ed99d1f01d7998c349316b5ba2d75ac41bb3dae022033b4d5800d2c5f461abf42a967625f77f4e16933bf9fa81aa753c423687eee02",
+      "public_key": "036f3972643ab052f9f77cbaf67f0e517180ac488453bde8cb27e9e3e1d6847d49",
+      "input_index": 0
+    }
+  ]
 }
 ```
 
@@ -3233,7 +2754,7 @@ This operation does not require authentication
 |Name|Type|Required|Description|
 |---|---|---|---|
 |tx|string|false|No description|
-|signatures|[signature](#schemasignature)|false|No description|
+|signatures|[[signature](#schemasignature)]|false|No description|
 
 <h2 id="tocSsignature">signature</h2>
 
@@ -3321,16 +2842,14 @@ This operation does not require authentication
 |coin|string|false|No description|
 |rate|number|false|No description|
 
-<h2 id="tocSrates">rates</h2>
+<h2 id="tocSsend_status">send_status</h2>
 
-<a id="schemarates"></a>
+<a id="schemasend_status"></a>
 
 ```json
 {
-  "rates": {
-    "coin": "zcash",
-    "rate": 0.004
-  }
+  "status_code": 200,
+  "message": "3bcf74e3421148db08daf6f5787a698534046bff54b2af1b8252b9166f8f4749"
 }
 ```
 
@@ -3338,5 +2857,6 @@ This operation does not require authentication
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|rates|[rate](#schemarate)|false|No description|
+|status_code|integer|false|No description|
+|message|string|false|No description|
 
